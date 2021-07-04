@@ -1,10 +1,42 @@
 import React from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faCog, faHome, faSearch } from '@fortawesome/free-solid-svg-icons';
-import { Col, Row, Form, Button, ButtonGroup, Breadcrumb, InputGroup, Dropdown } from '@themesberg/react-bootstrap';
-import { faCashRegister, faChartLine, faCloudUploadAlt, faPlus, faRocket, faTasks, faUserShield } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCheck,
+  faCog,
+  faHome,
+  faSearch,
+} from "@fortawesome/free-solid-svg-icons";
+import {
+  Col,
+  Row,
+  Form,
+  Button,
+  ButtonGroup,
+  Breadcrumb,
+  InputGroup,
+  Dropdown,
+} from "@themesberg/react-bootstrap";
+import {
+  faCashRegister,
+  faChartLine,
+  faCloudUploadAlt,
+  faPlus,
+  faRocket,
+  faTasks,
+  faUserShield,
+} from "@fortawesome/free-solid-svg-icons";
 import { trafficShares, totalOrders } from "../data/charts";
-import { CounterWidget, CircleChartWidget, BarChartWidget, TeamMembersWidget, ProgressTrackWidget, RankingWidget, SalesValueWidget, SalesValueWidgetPhone, AcquisitionWidget } from "../components/Widgets";
+import {
+  CounterWidget,
+  CircleChartWidget,
+  BarChartWidget,
+  TeamMembersWidget,
+  ProgressTrackWidget,
+  RankingWidget,
+  SalesValueWidget,
+  SalesValueWidgetPhone,
+  AcquisitionWidget,
+} from "../components/Widgets";
 
 export default () => {
   return (
@@ -12,12 +44,18 @@ export default () => {
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
         <div className="d-block mb-4 mb-md-0">
           <h4>Historical Analysis</h4>
-          <p className="mb-0">This page shows insights about the data of the past.</p>
+          <p className="mb-0">
+            This page shows insights about the data of the past.
+          </p>
         </div>
         <div className="btn-toolbar mb-2 mb-md-0">
           <ButtonGroup>
-            <Button variant="outline-primary" size="sm">Share</Button>
-            <Button variant="outline-primary" size="sm">Export</Button>
+            <Button variant="outline-primary" size="sm">
+              Share
+            </Button>
+            <Button variant="outline-primary" size="sm">
+              Export
+            </Button>
           </ButtonGroup>
         </div>
       </div>
@@ -46,11 +84,9 @@ export default () => {
         </Col>
 
         <Col xs={12} sm={6} xl={4} className="mb-4">
-          <CircleChartWidget
-            title="Traffic Share"
-            data={trafficShares} />
+          <CircleChartWidget title="Traffic Share" data={trafficShares} />
         </Col>
-      
+
         <Col xs={12} className="mb-4 d-none d-sm-block">
           <SalesValueWidget
             title="Sales Value"
@@ -93,13 +129,9 @@ export default () => {
         </Col>
 
         <Col xs={12} sm={6} xl={4} className="mb-4">
-          <CircleChartWidget
-            title="Traffic Share"
-            data={trafficShares} />
+          <CircleChartWidget title="Traffic Share" data={trafficShares} />
         </Col>
-      
       </Row>
-
     </>
   );
 };
