@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleDown,
@@ -23,6 +23,7 @@ import {
   Row,
   Card,
   Image,
+  Form,
   Button,
   ListGroup,
   ProgressBar,
@@ -53,43 +54,123 @@ export const ProfileCardWidget = () => {
           className="user-avatar large-avatar rounded-circle mx-auto mt-n7 mb-4"
         />
         <Card.Title>Lil bitch</Card.Title>
+
         <Card.Subtitle className="fw-normal">
           Senior Software Engineer
         </Card.Subtitle>
         <Card.Text className="text-gray mb-4">New York, USA</Card.Text>
-      </Card.Body>
-    </Card>
-  );
-};
-
-export const ChoosePhotoWidget = (props) => {
-  const { title, photo } = props;
-
-  return (
-    <Card border="light" className="bg-white shadow-sm mb-4">
-      <Card.Body>
-        <h5 className="mb-4">{title}</h5>
-        <div className="d-xl-flex align-items-center">
-          <div className="user-avatar xl-avatar">
-            <Image fluid rounded src={photo} />
-          </div>
-          <div className="file-field">
-            <div className="d-flex justify-content-xl-center ms-xl-3">
-              <div className="d-flex">
-                <span className="icon icon-md">
-                  <FontAwesomeIcon icon={faPaperclip} className="me-3" />
-                </span>
-                <input type="file" />
-                <div className="d-md-block text-start">
-                  <div className="fw-normal text-dark mb-1">Choose Image</div>
-                  <div className="text-gray small">
-                    JPG, GIF or PNG. Max size of 800K
-                  </div>
+        <div className="file-field">
+          <div className="d-flex justify-content-xl-center ms-xl-3">
+            <div className="d-flex">
+              <span className="icon icon-md">
+                <FontAwesomeIcon icon={faPaperclip} className="me-3" />
+              </span>
+              <input type="file" />
+              <div className="d-md-block text-start">
+                <div className="fw-normal text-dark mb-1">Choose Image</div>
+                <div className="text-gray small">
+                  JPG, GIF or PNG. Max size of 800K
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </Card.Body>
+    </Card>
+  );
+};
+
+export const UserCardWidget = (props) => {
+  const [firstName, setFirstName] = useState("John");
+  const [lastName, setLastName] = useState("Doe");
+  const [email, setEmail] = useState("johnie@sins.com");
+  const [password, setPassword] = useState("****");
+  const [userType, setUserType] = useState("Bouncer");
+
+  const handleSubmit = (event) => {
+    // event.preventDefault();
+    console.log(firstName, lastName, email, password, userType);
+    // props.loginAPI(newUserData);
+  };
+
+  return (
+    <Card border="light" className="text-center p-0 mb-4">
+      <Card.Body className="pb-5">
+        <Card.Title>Create New User</Card.Title>
+
+        <Form onSubmit={handleSubmit}>
+          <Row className="mb-3">
+            <Col md={6} className="mb-3">
+              <Form.Group id="firstName" style={{ textAlign: "left" }}>
+                <Form.Label>First Name</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  placeholder="Enter your first name"
+                  onChange={(e) => setFirstName(e.target.value)}
+                />
+              </Form.Group>
+            </Col>
+            <Col md={6} className="mb-3">
+              <Form.Group id="lastName" style={{ textAlign: "left" }}>
+                <Form.Label>Last Name</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  placeholder="Enter your last name"
+                  onChange={(e) => setLastName(e.target.value)}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row className="mb-3">
+            <Col sm={4} className="mb-3">
+              <Form.Group id="email" style={{ textAlign: "left" }}>
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  required
+                  type="email"
+                  placeholder="Enter your emailaddress"
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </Form.Group>
+            </Col>
+            <Col sm={4} className="mb-3">
+              <Form.Group id="password" style={{ textAlign: "left" }}>
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  required
+                  type="password"
+                  placeholder="Enter your password"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </Form.Group>
+            </Col>
+            <Col sm={4} className="mb-3">
+              <Form.Group id="usertype" style={{ textAlign: "left" }}>
+                <Form.Label>User Type</Form.Label>
+                <br />
+                <Form.Select
+                  required
+                  id="state"
+                  onChange={(e) => setUserType(e.target.value)}
+                  defaultValue="Bouncer"
+                >
+                  <option value="Admin">Admin</option>
+                  <option value="Manager">Manager</option>
+                  <option selected value="Bouncer">
+                    Bouncer
+                  </option>
+                </Form.Select>
+              </Form.Group>
+            </Col>
+          </Row>
+          <div className="mt-3">
+            <Button variant="primary" type="submit">
+              Create User
+            </Button>
+          </div>
+        </Form>
       </Card.Body>
     </Card>
   );
@@ -442,7 +523,7 @@ export const SalesValueWidget = (props) => {
         </div>
       </Card.Header>
       <Card.Body className="p-2">
-        <SalesValueChart />
+        <SalesValueChart data={props.data} />
       </Card.Body>
     </Card>
   );
@@ -478,7 +559,7 @@ export const SalesValueWidgetPhone = (props) => {
         </div>
       </Card.Header>
       <Card.Body className="p-2">
-        <SalesValueChartphone />
+        <SalesValueChartphone data={props.data} />
       </Card.Body>
     </Card>
   );

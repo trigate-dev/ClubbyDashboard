@@ -37,7 +37,7 @@ export const GeneralInfoForm = () => {
                 <Form.Control
                   required
                   type="text"
-                  placeholder="Also your last name"
+                  placeholder="Enter your last name"
                 />
               </Form.Group>
             </Col>

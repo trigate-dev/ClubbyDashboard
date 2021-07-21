@@ -32,13 +32,18 @@ import {
 import { PageVisitsTable } from "../components/Tables";
 import { trafficShares, totalOrders } from "../data/charts";
 import { loginAPI } from "../services/login/actions";
-import { getPresentVisitorsAPI } from "../services/statistics/actions";
 import axios from "axios";
 import { format } from "date-fns";
 
 const TodayComponent = (props) => {
   const [presentCount, setPresentCount] = useState(0);
   const [lastChange, setLastChange] = useState(format(new Date(), "kk:mm:ss"));
+  const [totalCount, setTotalCount] = useState(0);
+
+  const graphData = {
+    labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    series: [[1, 2, 2, 3, 3, 4, 3]],
+  };
 
   async function getPresentVisitorsAPI(opening_datetime, closing_datetime) {
     await axios
@@ -58,7 +63,7 @@ const TodayComponent = (props) => {
       });
   }
 
-  async function getLastVisitorsChange(opening_datetime, closing_datetime) {
+  async function getLastVisitorsChangeAPI(opening_datetime, closing_datetime) {
     await axios
       .get("/getLastVisitorsChange", {
         params: {
@@ -67,22 +72,42 @@ const TodayComponent = (props) => {
         },
       })
       .then((response) => {
-        let date = new Date(response.data.timestamp).toLocaleTimeString();
+        let date = new Date(response.data.timestamp).toLocaleString();
         setLastChange(date);
       })
       .catch((err) => {
         console.log(
-          "[TodayOverview.js] getLastVisitorsChange || Could not fetch data. Try again later."
+          "[TodayOverview.js] getLastVisitorsChangeAPI || Could not fetch data. Try again later."
+        );
+      });
+  }
+
+  async function getTotalVisitorsAPI(opening_datetime, closing_datetime) {
+    await axios
+      .get("/getTotalVisitors", {
+        params: {
+          opening_datetime: opening_datetime,
+          closing_datetime: closing_datetime,
+        },
+      })
+      .then((response) => {
+        setTotalCount(response.data.count);
+      })
+      .catch((err) => {
+        console.log(
+          "[TodayOverview.js] getTotalVisitorsAPI || Could not fetch data. Try again later."
         );
       });
   }
 
   useEffect(() => {
     getPresentVisitorsAPI("2021-06-18 10:00:00", "2021-06-18 23:00:00");
-    getLastVisitorsChange("2021-06-18 10:00:00", "2021-07-18 23:00:00");
+    getLastVisitorsChangeAPI("2021-06-18 10:00:00", "2021-07-18 23:00:00");
+    getTotalVisitorsAPI("2021-06-18 10:00:00", "2021-07-18 23:00:00");
     const interval = setInterval(() => {
       getPresentVisitorsAPI("2021-06-18 10:00:00", "2021-06-18 23:00:00");
-      getLastVisitorsChange("2021-06-18 10:00:00", "2021-07-18 23:00:00");
+      getLastVisitorsChangeAPI("2021-06-18 10:00:00", "2021-07-18 23:00:00");
+      getTotalVisitorsAPI("2021-06-18 10:00:00", "2021-07-18 23:00:00");
     }, 300000);
     return () => clearInterval(interval);
   }, []);
@@ -111,6 +136,7 @@ const TodayComponent = (props) => {
           <SalesValueWidget
             title="Sales Value"
             value="10,567"
+            data={graphData}
             percentage={10.57}
             period={lastChange}
           />
@@ -118,6 +144,7 @@ const TodayComponent = (props) => {
         <Col xs={12} className="mb-4 d-sm-none">
           <SalesValueWidgetPhone
             title="Sales Value"
+            data={graphData}
             value="10,567"
             percentage={10.57}
             period={lastChange}
@@ -125,7 +152,7 @@ const TodayComponent = (props) => {
         </Col>
         <Col xs={12} sm={6} xl={4} className="mb-4">
           <CounterWidget
-            category="Visitors"
+            category="Current Visitors"
             title={presentCount}
             period={lastChange}
             percentage={18.2}
@@ -137,8 +164,8 @@ const TodayComponent = (props) => {
 
         <Col xs={12} sm={6} xl={4} className="mb-4">
           <CounterWidget
-            category="Revenue"
-            title="$43,594"
+            category="Total Visitors"
+            title={totalCount}
             period={lastChange}
             percentage={28.4}
             icon={faCashRegister}
@@ -175,5 +202,4 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
   loginAPI,
-  getPresentVisitorsAPI,
 })(TodayComponent);
