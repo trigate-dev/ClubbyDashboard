@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCheck,
@@ -38,7 +39,11 @@ import {
   AcquisitionWidget,
 } from "../components/Widgets";
 
-export default () => {
+const HistoryComponent = (props) => {
+  const graphData = {
+    labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    series: [[1, 2, 2, 3, 3, 4, 3]],
+  };
   return (
     <>
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
@@ -92,6 +97,7 @@ export default () => {
             title="Sales Value"
             value="10,567"
             percentage={10.57}
+            data={graphData}
           />
         </Col>
         <Col xs={12} className="mb-4 d-sm-none">
@@ -99,6 +105,7 @@ export default () => {
             title="Sales Value"
             value="10,567"
             percentage={10.57}
+            data={graphData}
           />
         </Col>
       </Row>
@@ -135,3 +142,8 @@ export default () => {
     </>
   );
 };
+function mapStateToProps(state) {
+  return {};
+}
+
+export default connect(mapStateToProps, {})(HistoryComponent);

@@ -14,3 +14,38 @@ export const userInfoAPI = () => (dispatch) => {
       );
     });
 };
+
+export const createNewUserAPI = (
+  firstName,
+  lastName,
+  email,
+  password,
+  userType
+) => {
+  const requestData = {
+    first_name: firstName,
+    last_name: lastName,
+    email: email,
+    password: password,
+    user_type: userType,
+  };
+
+  axios
+    .post("/create_user", requestData)
+    .then((response) => {
+      if (response.data.message === "User created") {
+        alert("A new user has been created!");
+        window.location.reload();
+      }
+    })
+    .catch((err) => {
+      if (err.response.status === 422) {
+        alert(err.response.data.detail);
+      } else {
+        alert("Something went wrong. Try again!");
+      }
+      console.log(
+        "[userInfo.actions.js] createNewUserAPI || Could not create new user. Try again later."
+      );
+    });
+};

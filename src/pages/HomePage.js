@@ -23,7 +23,7 @@ import Navbars from "./components/Navbars";
 import requireAuth from "../utils/requireAuth";
 import axios from "axios";
 
-axios.defaults.baseURL = "https://clubbybackendauth.herokuapp.com";
+axios.defaults.baseURL = "https://clubbybackend.herokuapp.com";
 
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);

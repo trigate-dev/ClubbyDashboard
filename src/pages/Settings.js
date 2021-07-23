@@ -13,7 +13,10 @@ import {
   faStore,
 } from "@fortawesome/free-solid-svg-icons";
 import { Col, Row, Button, Dropdown } from "@themesberg/react-bootstrap";
-import { ProfileCardWidget, UserCardWidget } from "../components/Widgets";
+import {
+  ProfileCardWidget,
+  CreateNewUserCardWidget,
+} from "../components/Widgets";
 import { GeneralInfoForm } from "../components/Forms";
 
 import Profile3 from "../assets/img/team/profile-picture-3.jpg";
@@ -24,7 +27,7 @@ export default () => {
       <Row>
         <Col xs={12} xl={8}>
           <GeneralInfoForm />
-          <UserCardWidget />
+          <CreateNewUserCardWidget />
         </Col>
 
         <Col xs={12} xl={4}>

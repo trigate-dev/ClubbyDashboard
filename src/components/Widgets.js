@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleDown,
@@ -34,10 +34,10 @@ import {
   SalesValueChart,
   SalesValueChartphone,
 } from "./Charts";
-
+import { connect } from "react-redux";
 import Profile3 from "../assets/img/team/profile-picture-3.jpg";
 import ProfileCover from "../assets/img/profile-cover.jpg";
-
+import { createNewUserAPI } from "../services/userInfo/actions";
 import teamMembers from "../data/teamMembers";
 
 export const ProfileCardWidget = () => {
@@ -80,7 +80,7 @@ export const ProfileCardWidget = () => {
   );
 };
 
-export const UserCardWidget = (props) => {
+export function CreateNewUserCardWidget(props) {
   const [firstName, setFirstName] = useState("John");
   const [lastName, setLastName] = useState("Doe");
   const [email, setEmail] = useState("johnie@sins.com");
@@ -89,8 +89,7 @@ export const UserCardWidget = (props) => {
 
   const handleSubmit = (event) => {
     // event.preventDefault();
-    console.log(firstName, lastName, email, password, userType);
-    // props.loginAPI(newUserData);
+    createNewUserAPI(firstName, lastName, email, password, userType);
   };
 
   return (
@@ -174,7 +173,7 @@ export const UserCardWidget = (props) => {
       </Card.Body>
     </Card>
   );
-};
+}
 
 export const CounterWidget = (props) => {
   const { icon, iconColor, category, title, period, percentage, comparison } =

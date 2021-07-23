@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCashRegister,
@@ -16,8 +17,6 @@ import {
   Dropdown,
   ButtonGroup,
 } from "@themesberg/react-bootstrap";
-import { connect } from "react-redux";
-
 import {
   CounterWidget,
   CircleChartWidget,
