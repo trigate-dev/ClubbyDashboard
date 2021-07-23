@@ -3,7 +3,6 @@ import Chartist from "react-chartist";
 import ChartistTooltip from "chartist-plugin-tooltips-updated";
 
 export const SalesValueChart = ({ data }) => {
-  console.dir(data);
   const options = {
     low: 0,
     showArea: true,

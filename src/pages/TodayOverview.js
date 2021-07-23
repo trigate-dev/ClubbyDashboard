@@ -33,16 +33,13 @@ import { trafficShares, totalOrders } from "../data/charts";
 import { loginAPI } from "../services/login/actions";
 import axios from "axios";
 import { format } from "date-fns";
+import { fetchChartData } from "../data/charts";
 
 const TodayComponent = (props) => {
   const [presentCount, setPresentCount] = useState(0);
-  const [lastChange, setLastChange] = useState(format(new Date(), "kk:mm:ss"));
+  const [lastChange, setLastChange] = useState(format(new Date(), "hh:mm:ss"));
   const [totalCount, setTotalCount] = useState(0);
-
-  const graphData = {
-    labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-    series: [[1, 2, 2, 3, 3, 4, 3]],
-  };
+  const [graphData, setGraphData] = useState({});
 
   async function getPresentVisitorsAPI(opening_datetime, closing_datetime) {
     await axios
@@ -100,14 +97,24 @@ const TodayComponent = (props) => {
   }
 
   useEffect(() => {
-    getPresentVisitorsAPI("2021-06-18 10:00:00", "2021-06-18 23:00:00");
-    getLastVisitorsChangeAPI("2021-06-18 10:00:00", "2021-07-18 23:00:00");
-    getTotalVisitorsAPI("2021-06-18 10:00:00", "2021-07-18 23:00:00");
+    fetchChartData("2021-07-23 10:00:00", "2021-07-24 23:00:00").then(
+      (data) => {
+        setGraphData(data);
+      }
+    );
+    getPresentVisitorsAPI("2021-07-23 10:00:00", "2021-07-24 23:00:00");
+    getLastVisitorsChangeAPI("2021-07-23 10:00:00", "2021-07-24 23:00:00");
+    getTotalVisitorsAPI("2021-07-23 10:00:00", "2021-07-24 23:00:00");
     const interval = setInterval(() => {
-      getPresentVisitorsAPI("2021-06-18 10:00:00", "2021-06-18 23:00:00");
-      getLastVisitorsChangeAPI("2021-06-18 10:00:00", "2021-07-18 23:00:00");
-      getTotalVisitorsAPI("2021-06-18 10:00:00", "2021-07-18 23:00:00");
-    }, 300000);
+      getPresentVisitorsAPI("2021-07-23 10:00:00", "2021-07-24 23:00:00");
+      getLastVisitorsChangeAPI("2021-07-23 10:00:00", "2021-07-24 23:00:00");
+      getTotalVisitorsAPI("2021-07-23 10:00:00", "2021-07-24 23:00:00");
+      fetchChartData("2021-07-23 10:00:00", "2021-07-24 23:00:00").then(
+        (data) => {
+          setGraphData(data);
+        }
+      );
+    }, 60000);
     return () => clearInterval(interval);
   }, []);
 
@@ -129,12 +136,10 @@ const TodayComponent = (props) => {
           </ButtonGroup>
         </div>
       </div>
-
       <Row className="justify-content-md-center">
         <Col xs={12} className="mb-4 d-none d-sm-block">
           <SalesValueWidget
-            title="Sales Value"
-            value="10,567"
+            title="Total Visitors"
             data={graphData}
             percentage={10.57}
             period={lastChange}
@@ -144,7 +149,6 @@ const TodayComponent = (props) => {
           <SalesValueWidgetPhone
             title="Sales Value"
             data={graphData}
-            value="10,567"
             percentage={10.57}
             period={lastChange}
           />

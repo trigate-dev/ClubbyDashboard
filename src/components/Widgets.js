@@ -493,7 +493,7 @@ export const RankingWidget = () => {
 };
 
 export const SalesValueWidget = (props) => {
-  const { title, value, percentage } = props;
+  const { title, percentage } = props;
   const percentageIcon = percentage < 0 ? faAngleDown : faAngleUp;
   const percentageColor = percentage < 0 ? "text-danger" : "text-success";
 
@@ -502,7 +502,6 @@ export const SalesValueWidget = (props) => {
       <Card.Header className="d-flex flex-row align-items-center flex-0">
         <div className="d-block">
           <h5 className="fw-normal mb-2">{title}</h5>
-          <h3>${value}</h3>
           <small className="fw-bold mt-2">
             <span className="me-2">Yesterday</span>
             <FontAwesomeIcon
