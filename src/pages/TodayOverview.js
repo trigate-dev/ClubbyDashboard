@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Math from "math";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -34,12 +35,15 @@ import { loginAPI } from "../services/login/actions";
 import axios from "axios";
 import { format } from "date-fns";
 import { fetchChartData } from "../data/charts";
+import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
+import * as ReactDOM from "react-dom";
 
 const TodayComponent = (props) => {
   const [presentCount, setPresentCount] = useState(0);
   const [lastChange, setLastChange] = useState(format(new Date(), "hh:mm:ss"));
   const [totalCount, setTotalCount] = useState(0);
   const [graphData, setGraphData] = useState({});
+  const [locationCapacity, setLocationCapacity] = useState(0);
 
   async function getPresentVisitorsAPI(opening_datetime, closing_datetime) {
     await axios
@@ -96,6 +100,19 @@ const TodayComponent = (props) => {
       });
   }
 
+  async function getLocationCapacityAPI() {
+    await axios
+      .get("/locationCapacity")
+      .then((response) => {
+        setLocationCapacity(response.data.capacity);
+      })
+      .catch((err) => {
+        console.log(
+          "[TodayOverview.js] getLocationCapacityAPI || Could not fetch data. Try again later."
+        );
+      });
+  }
+
   useEffect(() => {
     fetchChartData("2021-07-23 10:00:00", "2021-07-24 23:00:00").then(
       (data) => {
@@ -105,10 +122,12 @@ const TodayComponent = (props) => {
     getPresentVisitorsAPI("2021-07-23 10:00:00", "2021-07-24 23:00:00");
     getLastVisitorsChangeAPI("2021-07-23 10:00:00", "2021-07-24 23:00:00");
     getTotalVisitorsAPI("2021-07-23 10:00:00", "2021-07-24 23:00:00");
+    getLocationCapacityAPI();
     const interval = setInterval(() => {
       getPresentVisitorsAPI("2021-07-23 10:00:00", "2021-07-24 23:00:00");
       getLastVisitorsChangeAPI("2021-07-23 10:00:00", "2021-07-24 23:00:00");
       getTotalVisitorsAPI("2021-07-23 10:00:00", "2021-07-24 23:00:00");
+      getLocationCapacityAPI();
       fetchChartData("2021-07-23 10:00:00", "2021-07-24 23:00:00").then(
         (data) => {
           setGraphData(data);
@@ -118,6 +137,13 @@ const TodayComponent = (props) => {
     return () => clearInterval(interval);
   }, []);
 
+  const pdfExportComponent = React.useRef(null);
+  const exportPDFWithComponent = () => {
+    if (pdfExportComponent.current) {
+      pdfExportComponent.current.save();
+    }
+  };
+
   return (
     <>
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
@@ -126,20 +152,29 @@ const TodayComponent = (props) => {
           <p className="mb-0">This page shows insights about today.</p>
         </div>
         <div className="btn-toolbar mb-2 mb-md-0">
-          <ButtonGroup>
-            <Button variant="outline-primary" size="sm">
-              Share
-            </Button>
-            <Button variant="outline-primary" size="sm">
-              Export
-            </Button>
-          </ButtonGroup>
+          <Button
+            variant="outline-primary"
+            size="sm"
+            onClick={exportPDFWithComponent}
+          >
+            Export
+          </Button>
         </div>
       </div>
+      <PDFExport
+        ref={pdfExportComponent}
+        paperSize="auto"
+        margin={40}
+        fileName={`Overview_${new Date().toLocaleDateString()}`}
+        author="Clubby"
+      >
+        <p>{"olaaa"}</p>
+        {/* insert the visibles here, see: https://www.telerik.com/kendo-react-ui/components/pdfprocessing/ */}
+      </PDFExport>
       <Row className="justify-content-md-center">
         <Col xs={12} className="mb-4 d-none d-sm-block">
           <SalesValueWidget
-            title="Total Visitors"
+            title="Visitors over time"
             data={graphData}
             percentage={10.57}
             period={lastChange}
@@ -147,7 +182,7 @@ const TodayComponent = (props) => {
         </Col>
         <Col xs={12} className="mb-4 d-sm-none">
           <SalesValueWidgetPhone
-            title="Sales Value"
+            title="Visitors over time"
             data={graphData}
             percentage={10.57}
             period={lastChange}
@@ -167,8 +202,14 @@ const TodayComponent = (props) => {
 
         <Col xs={12} sm={6} xl={4} className="mb-4">
           <CounterWidget
-            category="Total Visitors"
-            title={totalCount}
+            category="Occupancy"
+            title={
+              locationCapacity
+                ? Number((presentCount / locationCapacity) * 100)
+                    .toFixed(0)
+                    .toString() + "%"
+                : "-"
+            }
             period={lastChange}
             percentage={28.4}
             icon={faCashRegister}
@@ -177,22 +218,14 @@ const TodayComponent = (props) => {
         </Col>
 
         <Col xs={12} sm={6} xl={4} className="mb-4">
-          <CircleChartWidget title="Traffic Share" data={trafficShares} />
-        </Col>
-      </Row>
-
-      <Row>
-        <Col xs={12} xl={4}>
-          <Row>
-            <Col xs={12} className="mb-4">
-              <BarChartWidget
-                title="Total orders"
-                value={452}
-                percentage={18.2}
-                data={totalOrders}
-              />
-            </Col>
-          </Row>
+          <CounterWidget
+            category="Total Visitors"
+            title={totalCount}
+            period={lastChange}
+            percentage={28.4}
+            icon={faCashRegister}
+            iconColor="shape-tertiary"
+          />
         </Col>
       </Row>
     </>

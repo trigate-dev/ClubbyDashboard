@@ -39,6 +39,58 @@ import Profile3 from "../assets/img/team/profile-picture-3.jpg";
 import ProfileCover from "../assets/img/profile-cover.jpg";
 import { createNewUserAPI } from "../services/userInfo/actions";
 import teamMembers from "../data/teamMembers";
+import { setLocationCapacityAPI } from "../services/location/actions";
+import axios from "axios";
+
+export const UserInformation = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    window.location.reload();
+  };
+
+  return (
+    <Card border="light" className=" p-0 mb-4">
+      <Card.Body className="pb-5">
+        <Card.Title>Your information</Card.Title>
+        <Form onSubmit={handleSubmit}>
+          <Row className="mb-3">
+            <Col md={6} className="mb-3">
+              <Form.Group id="firstName" style={{ textAlign: "left" }}>
+                <Form.Label>First Name</Form.Label>
+                <Form.Control type="text" placeholder="Enter your first name" />
+              </Form.Group>
+            </Col>
+            <Col md={6} className="mb-3">
+              <Form.Group id="lastName" style={{ textAlign: "left" }}>
+                <Form.Label>Last Name</Form.Label>
+                <Form.Control type="text" placeholder="Enter your last name" />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row className="mb-3">
+            <Col md={6} className="mb-3">
+              <Form.Group id="emal" style={{ textAlign: "left" }}>
+                <Form.Label>Email</Form.Label>
+                <Form.Control type="email" placeholder="name@company.com" />
+              </Form.Group>
+            </Col>
+            <Col md={6} className="mb-3">
+              <Form.Group id="emal" style={{ textAlign: "left" }}>
+                <Form.Label>Password</Form.Label>
+                <Form.Control type="password" placeholder="****" />
+              </Form.Group>
+            </Col>
+          </Row>
+          <div className="mt-3" style={{ textAlign: "center" }}>
+            <Button variant="primary" type="submit">
+              Save
+            </Button>
+          </div>
+        </Form>
+      </Card.Body>
+    </Card>
+  );
+};
 
 export const ProfileCardWidget = () => {
   return (
@@ -53,28 +105,10 @@ export const ProfileCardWidget = () => {
           alt="Neil Portrait"
           className="user-avatar large-avatar rounded-circle mx-auto mt-n7 mb-4"
         />
-        <Card.Title>Lil bitch</Card.Title>
+        <Card.Title>{"<user name>"}</Card.Title>
 
-        <Card.Subtitle className="fw-normal">
-          Senior Software Engineer
-        </Card.Subtitle>
-        <Card.Text className="text-gray mb-4">New York, USA</Card.Text>
-        <div className="file-field">
-          <div className="d-flex justify-content-xl-center ms-xl-3">
-            <div className="d-flex">
-              <span className="icon icon-md">
-                <FontAwesomeIcon icon={faPaperclip} className="me-3" />
-              </span>
-              <input type="file" />
-              <div className="d-md-block text-start">
-                <div className="fw-normal text-dark mb-1">Choose Image</div>
-                <div className="text-gray small">
-                  JPG, GIF or PNG. Max size of 800K
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <Card.Subtitle className="fw-normal">{"<club name>"} </Card.Subtitle>
+        <Card.Text className="text-gray mb-4">{"<club location>"}</Card.Text>
       </Card.Body>
     </Card>
   );
@@ -88,14 +122,14 @@ export function CreateNewUserCardWidget(props) {
   const [userType, setUserType] = useState("Bouncer");
 
   const handleSubmit = (event) => {
-    // event.preventDefault();
+    event.preventDefault();
     createNewUserAPI(firstName, lastName, email, password, userType);
   };
 
   return (
-    <Card border="light" className="text-center p-0 mb-4">
+    <Card border="light" className=" p-0 mb-4">
       <Card.Body className="pb-5">
-        <Card.Title>Create New User</Card.Title>
+        <Card.Title>Create new user</Card.Title>
 
         <Form onSubmit={handleSubmit}>
           <Row className="mb-3">
@@ -164,9 +198,83 @@ export function CreateNewUserCardWidget(props) {
               </Form.Group>
             </Col>
           </Row>
-          <div className="mt-3">
+          <div className="mt-3" style={{ textAlign: "center" }}>
             <Button variant="primary" type="submit">
               Create User
+            </Button>
+          </div>
+        </Form>
+      </Card.Body>
+    </Card>
+  );
+}
+
+export function LocationCapacity(props) {
+  const [capacity, setCapacity] = useState(0);
+
+  async function getLocationCapacityAPI() {
+    await axios
+      .get("/locationCapacity")
+      .then((response) => {
+        setCapacity(response.data.capacity);
+      })
+      .catch((err) => {
+        console.log(
+          "[TodayOverview.js] getLocationCapacityAPI || Could not fetch data. Try again later."
+        );
+      });
+  }
+  useEffect(() => {
+    getLocationCapacityAPI();
+  }, []);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setLocationCapacityAPI(capacity);
+    window.location.reload(false);
+  };
+
+  return (
+    <Card border="light" className=" p-0 mb-4">
+      <Card.Body className="pb-5">
+        <Card.Title>Location information</Card.Title>
+
+        <Form onSubmit={handleSubmit}>
+          <Row className="mb-3">
+            <Col sm={6} className="mb-3" style={{ textAlign: "center" }}>
+              <Form.Group id="capacity" style={{ textAlign: "left" }}>
+                <Form.Label>Opening time</Form.Label>
+                <Form.Control
+                  type="time"
+                  // onChange={(e) => setOpeningTime(e.target.value)}
+                />
+              </Form.Group>
+            </Col>
+            <Col sm={6} className="mb-3" style={{ textAlign: "center" }}>
+              <Form.Group id="capacity" style={{ textAlign: "left" }}>
+                <Form.Label>Closing time</Form.Label>
+                <Form.Control
+                  type="time"
+                  // onChange={(e) => setClosingTime(e.target.value)}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row className="mb-3">
+            <Col sm={6} className="mb-3" style={{ textAlign: "center" }}>
+              <Form.Group id="capacity" style={{ textAlign: "left" }}>
+                <Form.Label>Capacity</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder={"Current capacity: " + capacity}
+                  onChange={(e) => setCapacity(e.target.value)}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+          <div className="mt-3" style={{ textAlign: "center" }}>
+            <Button variant="primary" type="submit">
+              Save
             </Button>
           </div>
         </Form>
