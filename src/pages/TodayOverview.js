@@ -35,8 +35,6 @@ import { loginAPI } from "../services/login/actions";
 import axios from "axios";
 import { format } from "date-fns";
 import { fetchChartData } from "../data/charts";
-import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
-import * as ReactDOM from "react-dom";
 
 const TodayComponent = (props) => {
   const [presentCount, setPresentCount] = useState(0);
@@ -137,13 +135,6 @@ const TodayComponent = (props) => {
     return () => clearInterval(interval);
   }, []);
 
-  const pdfExportComponent = React.useRef(null);
-  const exportPDFWithComponent = () => {
-    if (pdfExportComponent.current) {
-      pdfExportComponent.current.save();
-    }
-  };
-
   return (
     <>
       <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
@@ -152,25 +143,11 @@ const TodayComponent = (props) => {
           <p className="mb-0">This page shows insights about today.</p>
         </div>
         <div className="btn-toolbar mb-2 mb-md-0">
-          <Button
-            variant="outline-primary"
-            size="sm"
-            onClick={exportPDFWithComponent}
-          >
+          <Button variant="outline-primary" size="sm">
             Export
           </Button>
         </div>
       </div>
-      <PDFExport
-        ref={pdfExportComponent}
-        paperSize="auto"
-        margin={40}
-        fileName={`Overview_${new Date().toLocaleDateString()}`}
-        author="Clubby"
-      >
-        <p>{"olaaa"}</p>
-        {/* insert the visibles here, see: https://www.telerik.com/kendo-react-ui/components/pdfprocessing/ */}
-      </PDFExport>
       <Row className="justify-content-md-center">
         <Col xs={12} className="mb-4 d-none d-sm-block">
           <SalesValueWidget
