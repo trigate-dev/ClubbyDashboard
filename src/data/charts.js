@@ -1,11 +1,9 @@
-import { useState } from "react";
 import {
   faDesktop,
   faMobileAlt,
   faTabletAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import { format } from "date-fns";
 
 const trafficShares = [
   { id: 1, label: "Desktop", value: 60, color: "secondary", icon: faDesktop },

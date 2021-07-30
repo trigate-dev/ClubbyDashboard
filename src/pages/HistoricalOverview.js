@@ -1,42 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCheck,
-  faCog,
-  faHome,
-  faSearch,
-} from "@fortawesome/free-solid-svg-icons";
 import {
   Col,
   Row,
-  Form,
   Button,
   ButtonGroup,
-  Breadcrumb,
-  InputGroup,
   Dropdown,
 } from "@themesberg/react-bootstrap";
-import {
-  faCashRegister,
-  faChartLine,
-  faCloudUploadAlt,
-  faPlus,
-  faRocket,
-  faTasks,
-  faUserShield,
-} from "@fortawesome/free-solid-svg-icons";
-import { trafficShares, totalOrders } from "../data/charts";
+import { faCashRegister, faChartLine } from "@fortawesome/free-solid-svg-icons";
+import { trafficShares } from "../data/charts";
 import {
   CounterWidget,
   CircleChartWidget,
-  BarChartWidget,
-  TeamMembersWidget,
-  ProgressTrackWidget,
-  RankingWidget,
   SalesValueWidget,
   SalesValueWidgetPhone,
-  AcquisitionWidget,
 } from "../components/Widgets";
 
 const HistoryComponent = (props) => {

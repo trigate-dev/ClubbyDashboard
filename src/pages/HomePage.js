@@ -8,17 +8,12 @@ import TodayOverview from "./TodayOverview";
 import HistoryOverview from "./HistoricalOverview";
 import Settings from "./Settings";
 import Signup from "./Signup";
-import ForgotPassword from "./examples/ForgotPassword";
-import ResetPassword from "./examples/ResetPassword";
 
 // components
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Preloader from "../components/Preloader";
-
-import Navs from "./components/Navs";
-import Navbars from "./components/Navbars";
 
 import requireAuth from "../utils/requireAuth";
 import axios from "axios";

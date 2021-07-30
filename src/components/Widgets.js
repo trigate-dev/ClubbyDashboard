@@ -9,8 +9,6 @@ import {
   faFlagUsa,
   faFolderOpen,
   faGlobeEurope,
-  faPaperclip,
-  faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faAngular,
@@ -34,7 +32,7 @@ import {
   SalesValueChart,
   SalesValueChartphone,
 } from "./Charts";
-import { connect } from "react-redux";
+
 import Profile3 from "../assets/img/team/profile-picture-3.jpg";
 import ProfileCover from "../assets/img/profile-cover.jpg";
 import { createNewUserAPI } from "../services/userInfo/actions";

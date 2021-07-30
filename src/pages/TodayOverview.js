@@ -1,36 +1,13 @@
 import React, { useState, useEffect } from "react";
-import Math from "math";
 import { connect } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCashRegister,
-  faChartLine,
-  faCloudUploadAlt,
-  faPlus,
-  faRocket,
-  faTasks,
-  faUserShield,
-} from "@fortawesome/free-solid-svg-icons";
-import {
-  Col,
-  Row,
-  Button,
-  Dropdown,
-  ButtonGroup,
-} from "@themesberg/react-bootstrap";
+import { faCashRegister, faChartLine } from "@fortawesome/free-solid-svg-icons";
+import { Col, Row, Button } from "@themesberg/react-bootstrap";
 import {
   CounterWidget,
-  CircleChartWidget,
-  BarChartWidget,
-  TeamMembersWidget,
-  ProgressTrackWidget,
-  RankingWidget,
   SalesValueWidget,
   SalesValueWidgetPhone,
-  AcquisitionWidget,
 } from "../components/Widgets";
-import { PageVisitsTable } from "../components/Tables";
-import { trafficShares, totalOrders } from "../data/charts";
+
 import { loginAPI } from "../services/login/actions";
 import axios from "axios";
 import { format } from "date-fns";
