@@ -1,14 +1,14 @@
 import { SET_LOCATION_INFO} from './actionTypes';
 import axios from "axios";
 
-export const setLocationCapacityAPI = (capacity) => {
+export const changeLocationCapacityAPI = (capacity) => {
   const requestBody = {
     capacity: capacity,
   };
 
-  axios.post("/locationCapacity", requestBody).catch((err) => {
+  axios.post("/locationInfo", requestBody).catch((err) => {
     console.log(
-      "[location.actions.js] setLocationCapacityAPI || Could not set location capacity. Try again later."
+      "[location.actions.js] changeLocationCapacityAPI || Could not set location capacity. Try again later."
     );
   });
 };

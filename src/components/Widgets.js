@@ -37,7 +37,7 @@ import Profile3 from "../assets/img/team/profile-picture-3.jpg";
 import ProfileCover from "../assets/img/profile-cover.jpg";
 import { createNewUserAPI } from "../services/user/actions";
 import teamMembers from "../data/teamMembers";
-import { setLocationCapacityAPI } from "../services/location/actions";
+import { changeLocationCapacityAPI } from "../services/location/actions";
 import axios from "axios";
 
 export const UserInformation = () => {
@@ -207,14 +207,18 @@ export function CreateNewUserCardWidget(props) {
   );
 }
 
-export function LocationCapacity(props) {
+export function LocationInformation(props) {
   const [capacity, setCapacity] = useState(0);
+  const [openingTime, setOpeningTime] = useState('');
+  const [closingTime, setClosingTime] = useState('');
 
   async function getLocationInfoAPI() {
     await axios
       .get("/locationInfo")
       .then((response) => {
-        console.log(response.data);
+        setCapacity(response.data.capacity);
+        setOpeningTime(response.data.openingTime);
+        setClosingTime(response.data.closingTime);
       })
       .catch((err) => {
         console.log(
@@ -222,28 +226,14 @@ export function LocationCapacity(props) {
         );
       });
   }
-
-  async function getLocationCapacityAPI() {
-    await axios
-      .get("/locationCapacity")
-      .then((response) => {
-        setCapacity(response.data.capacity);
-      })
-      .catch((err) => {
-        console.log(
-          "[TodayOverview.js] getLocationCapacityAPI || Could not fetch data. Try again later."
-        );
-      });
-  }
   
   useEffect(() => {
-    getLocationCapacityAPI();
     getLocationInfoAPI();
   }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setLocationCapacityAPI(capacity);
+    changeLocationCapacityAPI(capacity);
     window.location.reload();
   };
 
@@ -259,7 +249,8 @@ export function LocationCapacity(props) {
                 <Form.Label>Opening time</Form.Label>
                 <Form.Control
                   type="time"
-                  // onChange={(e) => setOpeningTime(e.target.value)}
+                  // can we add a placeholder ?
+                  onChange={(e) => setOpeningTime(e.target.value)}
                 />
               </Form.Group>
             </Col>
@@ -268,7 +259,8 @@ export function LocationCapacity(props) {
                 <Form.Label>Closing time</Form.Label>
                 <Form.Control
                   type="time"
-                  // onChange={(e) => setClosingTime(e.target.value)}
+                  // can we add a placeholder ?
+                  onChange={(e) => setClosingTime(e.target.value)}
                 />
               </Form.Group>
             </Col>

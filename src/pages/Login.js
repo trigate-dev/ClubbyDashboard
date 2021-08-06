@@ -142,7 +142,6 @@ const Login = (props) => {
 function mapStateToProps(state) {
   return {
     token: state.login.login_data.token,
-    opening_time: state.location.location_info.opening_time
   };
 }
 

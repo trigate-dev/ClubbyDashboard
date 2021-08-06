@@ -4,7 +4,7 @@ import {
   UserInformation,
   ProfileCardWidget,
   CreateNewUserCardWidget,
-  LocationCapacity,
+  LocationInformation,
 } from "../components/Widgets";
 
 import Profile3 from "../assets/img/team/profile-picture-3.jpg";
@@ -25,7 +25,7 @@ export default () => {
                 title="Select profile photo"
                 photo={Profile3}
               />
-              <LocationCapacity />
+              <LocationInformation />
             </Col>
           </Row>
         </Col>

@@ -91,34 +91,35 @@ const TodayComponent = (props) => {
   }
 
   useEffect(() => {
-    
-    console.log(props.email)
-    var open = "2021-08-06 09:00:00"
-    var close = "2021-08-07 23:00:00"
-    
-    fetchChartData(open, close).then(
-      (data) => {
-        setGraphData(data);
-      }
-    );
-    getPresentVisitorsAPI(open, close);
-    getLastVisitorsChangeAPI(open, close);
-    getTotalVisitorsAPI(open, close);
-    getCurrentOccupancyPercentageAPI();
-    
-    const interval = setInterval(() => {
+    if(props.openingTime && props.closingTime){
+      var open = format(new Date(), "Y-MM-dd") + " " + props.openingTime 
+      var close = new Date()
+      var close = format(close.setDate(close.getDate()+1), "Y-MM-dd") + " " + props.closingTime // TODO: add logic when club closes before midnight
       
-      getPresentVisitorsAPI(open, close);
-      getLastVisitorsChangeAPI(open, close);
-      getTotalVisitorsAPI(open, close);
-      getCurrentOccupancyPercentageAPI()
       fetchChartData(open, close).then(
         (data) => {
           setGraphData(data);
         }
       );
-    }, 100000);
-    return () => clearInterval(interval);
+      getPresentVisitorsAPI(open, close);
+      getLastVisitorsChangeAPI(open, close);
+      getTotalVisitorsAPI(open, close);
+      getCurrentOccupancyPercentageAPI();
+      
+      const interval = setInterval(() => {
+        
+        getPresentVisitorsAPI(open, close);
+        getLastVisitorsChangeAPI(open, close);
+        getTotalVisitorsAPI(open, close);
+        getCurrentOccupancyPercentageAPI()
+        fetchChartData(open, close).then(
+          (data) => {
+            setGraphData(data);
+          }
+        );
+      }, 10000);
+      return () => clearInterval(interval);
+    }
   }, []);
 
   return (
@@ -193,7 +194,9 @@ const TodayComponent = (props) => {
 
 function mapStateToProps(state) {
   return {
-    email : state.user.user_info.email
+    userInfo : state.user.user_info,
+    openingTime : state.location.location_info.opening_time,
+    closingTime : state.location.location_info.closing_time
   };
 }
 
