@@ -9,6 +9,7 @@ import {
 } from "../components/Widgets";
 
 import { loginAPI } from "../services/login/actions";
+import { setLocationInfoInStoreAPI } from "../services/location/actions"
 import axios from "axios";
 import { format } from "date-fns";
 import { fetchChartData } from "../data/charts";
@@ -18,7 +19,8 @@ const TodayComponent = (props) => {
   const [lastChange, setLastChange] = useState(format(new Date(), "hh:mm:ss"));
   const [totalCount, setTotalCount] = useState(0);
   const [graphData, setGraphData] = useState({});
-  const [locationCapacity, setLocationCapacity] = useState(0);
+  const [occupancy, setOccupancy] = useState(0);
+  
 
   async function getPresentVisitorsAPI(opening_datetime, closing_datetime) {
     await axios
@@ -75,35 +77,42 @@ const TodayComponent = (props) => {
       });
   }
 
-  async function getLocationCapacityAPI() {
+  async function getCurrentOccupancyPercentageAPI() {
     await axios
-      .get("/locationCapacity")
+      .get("/currentOccupancyPercentage")
       .then((response) => {
-        setLocationCapacity(response.data.capacity);
+        setOccupancy(response.data)
       })
       .catch((err) => {
         console.log(
-          "[TodayOverview.js] getLocationCapacityAPI || Could not fetch data. Try again later."
+          "[TodayOverview.js] getCurrentOccupancyPercentageAPI || Could not fetch data. Try again later."
         );
       });
   }
 
   useEffect(() => {
-    fetchChartData("2021-08-04 09:00:00", "2021-08-05 23:00:00").then(
+    
+    console.log(props.email)
+    var open = "2021-08-06 09:00:00"
+    var close = "2021-08-07 23:00:00"
+    
+    fetchChartData(open, close).then(
       (data) => {
         setGraphData(data);
       }
     );
-    getPresentVisitorsAPI("2021-08-04 09:00:00", "2021-08-05 23:00:00");
-    getLastVisitorsChangeAPI("2021-08-04 09:00:00", "2021-08-05 23:00:00");
-    getTotalVisitorsAPI("2021-08-04 09:00:00", "2021-08-05 23:00:00");
-    getLocationCapacityAPI();
+    getPresentVisitorsAPI(open, close);
+    getLastVisitorsChangeAPI(open, close);
+    getTotalVisitorsAPI(open, close);
+    getCurrentOccupancyPercentageAPI();
+    
     const interval = setInterval(() => {
-      getPresentVisitorsAPI("2021-08-04 09:00:00", "2021-08-05 23:00:00");
-      getLastVisitorsChangeAPI("2021-08-04 09:00:00", "2021-08-05 23:00:00");
-      getTotalVisitorsAPI("2021-08-04 09:00:00", "2021-08-05 23:00:00");
-      getLocationCapacityAPI();
-      fetchChartData("2021-08-04 09:00:00", "2021-08-05 23:00:00").then(
+      
+      getPresentVisitorsAPI(open, close);
+      getLastVisitorsChangeAPI(open, close);
+      getTotalVisitorsAPI(open, close);
+      getCurrentOccupancyPercentageAPI()
+      fetchChartData(open, close).then(
         (data) => {
           setGraphData(data);
         }
@@ -121,7 +130,7 @@ const TodayComponent = (props) => {
         </div>
         <div className="btn-toolbar mb-2 mb-md-0">
           <Button variant="outline-primary" size="sm">
-            Export
+          Export
           </Button>
         </div>
       </div>
@@ -158,11 +167,7 @@ const TodayComponent = (props) => {
           <CounterWidget
             category="Occupancy"
             title={
-              locationCapacity
-                ? Number((presentCount / locationCapacity) * 100)
-                    .toFixed(0)
-                    .toString() + "%"
-                : "-"
+              occupancy + "%"
             }
             period={lastChange}
             percentage={28.4}
@@ -187,9 +192,11 @@ const TodayComponent = (props) => {
 };
 
 function mapStateToProps(state) {
-  return {};
+  return {
+    email : state.user.user_info.email
+  };
 }
 
 export default connect(mapStateToProps, {
-  loginAPI,
+  loginAPI,setLocationInfoInStoreAPI
 })(TodayComponent);

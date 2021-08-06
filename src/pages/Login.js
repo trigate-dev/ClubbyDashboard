@@ -18,20 +18,20 @@ import { Redirect } from "react-router-dom";
 import { Routes } from "../routes";
 import BgImage from "../assets/img/illustrations/signin.svg";
 import { loginAPI } from "../services/login/actions";
-import { userInfoAPI } from "../services/userInfo/actions";
+import { userInfoAPI } from "../services/user/actions";
+import {setLocationInfoInStoreAPI} from "../services/location/actions"
 
 const Login = (props) => {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
 
   const handleSubmit = () => {
-    console.log(username);
-    console.log(password);
-    props.loginAPI(username, password);
+      props.loginAPI(username, password)
   };
 
   if (props.token) {
     props.userInfoAPI();
+    props.setLocationInfoInStoreAPI();
     return <Redirect to={Routes.DashboardOverview.path} />;
   } else {
     return (
@@ -142,10 +142,12 @@ const Login = (props) => {
 function mapStateToProps(state) {
   return {
     token: state.login.login_data.token,
+    opening_time: state.location.location_info.opening_time
   };
 }
 
 export default connect(mapStateToProps, {
   loginAPI,
   userInfoAPI,
+  setLocationInfoInStoreAPI
 })(Login);

@@ -35,7 +35,7 @@ import {
 
 import Profile3 from "../assets/img/team/profile-picture-3.jpg";
 import ProfileCover from "../assets/img/profile-cover.jpg";
-import { createNewUserAPI } from "../services/userInfo/actions";
+import { createNewUserAPI } from "../services/user/actions";
 import teamMembers from "../data/teamMembers";
 import { setLocationCapacityAPI } from "../services/location/actions";
 import axios from "axios";
@@ -210,6 +210,19 @@ export function CreateNewUserCardWidget(props) {
 export function LocationCapacity(props) {
   const [capacity, setCapacity] = useState(0);
 
+  async function getLocationInfoAPI() {
+    await axios
+      .get("/locationInfo")
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((err) => {
+        console.log(
+          "[TodayOverview.js] getLocationInfoAPI || Could not fetch data. Try again later."
+        );
+      });
+  }
+
   async function getLocationCapacityAPI() {
     await axios
       .get("/locationCapacity")
@@ -222,14 +235,16 @@ export function LocationCapacity(props) {
         );
       });
   }
+  
   useEffect(() => {
     getLocationCapacityAPI();
+    getLocationInfoAPI();
   }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     setLocationCapacityAPI(capacity);
-    window.location.reload(false);
+    window.location.reload();
   };
 
   return (

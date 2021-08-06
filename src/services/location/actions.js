@@ -1,3 +1,4 @@
+import { SET_LOCATION_INFO} from './actionTypes';
 import axios from "axios";
 
 export const setLocationCapacityAPI = (capacity) => {
@@ -11,3 +12,27 @@ export const setLocationCapacityAPI = (capacity) => {
     );
   });
 };
+
+
+export const setLocationInfoInStoreAPI = () => (dispatch) => {
+  axios
+    .get("/locationInfo")
+    .then((response) => {
+      const location_info = {
+        address_id: response.data.address_id,
+        capacity: response.data.capacity,
+        opening_time: response.data.opening_time,
+        closing_time: response.data.closing_time,
+        location_name: response.data.name,
+        organisation_id: response.data.organisation_id,
+        location_id: response.data.id
+      };
+
+      dispatch({ type: SET_LOCATION_INFO, payload: location_info });
+    })
+    .catch((err) => {
+      console.log(
+        "[location.actions.js] getLocationInfoAPI || Could not put data in store. Try again later."
+      );
+    });
+}

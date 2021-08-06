@@ -22,6 +22,7 @@ const store = (initialState) => {
     const persist = {
       login: state.login,
       user: state.user,
+      location: state.location
     };
     window.localStorage.setItem("state", JSON.stringify(persist));
   });

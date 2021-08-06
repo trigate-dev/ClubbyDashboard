@@ -1,15 +1,15 @@
-import { LOGIN } from "./actionTypes";
+import { SET_LOCATION_INFO } from "./actionTypes";
 
 const initialState = {
-  login_data: [],
+  location_info: [],
 };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case LOGIN:
+    case SET_LOCATION_INFO:
       return {
         ...state,
-        login_data: action.payload,
+        location_info: action.payload,
       };
     default:
       return {
