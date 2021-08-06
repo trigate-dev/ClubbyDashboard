@@ -117,7 +117,7 @@ const TodayComponent = (props) => {
           setGraphData(data);
         }
       );
-    }, 1000);
+    }, 100000);
     return () => clearInterval(interval);
   }, []);
 
