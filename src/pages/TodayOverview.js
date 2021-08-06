@@ -89,26 +89,26 @@ const TodayComponent = (props) => {
   }
 
   useEffect(() => {
-    fetchChartData("2021-07-23 10:00:00", "2021-07-24 23:00:00").then(
+    fetchChartData("2021-08-04 09:00:00", "2021-08-05 23:00:00").then(
       (data) => {
         setGraphData(data);
       }
     );
-    getPresentVisitorsAPI("2021-07-23 10:00:00", "2021-07-24 23:00:00");
-    getLastVisitorsChangeAPI("2021-07-23 10:00:00", "2021-07-24 23:00:00");
-    getTotalVisitorsAPI("2021-07-23 10:00:00", "2021-07-24 23:00:00");
+    getPresentVisitorsAPI("2021-08-04 09:00:00", "2021-08-05 23:00:00");
+    getLastVisitorsChangeAPI("2021-08-04 09:00:00", "2021-08-05 23:00:00");
+    getTotalVisitorsAPI("2021-08-04 09:00:00", "2021-08-05 23:00:00");
     getLocationCapacityAPI();
     const interval = setInterval(() => {
-      getPresentVisitorsAPI("2021-07-23 10:00:00", "2021-07-24 23:00:00");
-      getLastVisitorsChangeAPI("2021-07-23 10:00:00", "2021-07-24 23:00:00");
-      getTotalVisitorsAPI("2021-07-23 10:00:00", "2021-07-24 23:00:00");
+      getPresentVisitorsAPI("2021-08-04 09:00:00", "2021-08-05 23:00:00");
+      getLastVisitorsChangeAPI("2021-08-04 09:00:00", "2021-08-05 23:00:00");
+      getTotalVisitorsAPI("2021-08-04 09:00:00", "2021-08-05 23:00:00");
       getLocationCapacityAPI();
-      fetchChartData("2021-07-23 10:00:00", "2021-07-24 23:00:00").then(
+      fetchChartData("2021-08-04 09:00:00", "2021-08-05 23:00:00").then(
         (data) => {
           setGraphData(data);
         }
       );
-    }, 60000);
+    }, 1000);
     return () => clearInterval(interval);
   }, []);
 

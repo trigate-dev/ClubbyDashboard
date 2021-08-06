@@ -259,7 +259,7 @@ export function LocationCapacity(props) {
             </Col>
           </Row>
           <Row className="mb-3">
-            <Col sm={6} className="mb-3" style={{ textAlign: "center" }}>
+            <Col className="mb-3" style={{ textAlign: "center" }}>
               <Form.Group id="capacity" style={{ textAlign: "left" }}>
                 <Form.Label>Capacity</Form.Label>
                 <Form.Control
