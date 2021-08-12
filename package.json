@@ -56,7 +56,8 @@
     "react-scripts": "3.4.3",
     "react-transition-group": "^4.4.1",
     "redux-thunk": "^2.3.0",
-    "simplebar-react": "^2.3.0"
+    "simplebar-react": "^2.3.0",
+    "yarn": "^1.22.11"
   },
   "scripts": {
     "start": "react-scripts start",

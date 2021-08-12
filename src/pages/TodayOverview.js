@@ -120,7 +120,7 @@ const TodayComponent = (props) => {
       }, 10000);
       return () => clearInterval(interval);
     }
-  }, []);
+  }, [props.openingTime, props.closingTime]); // added these two props due to dependency wanring
 
   return (
     <>
