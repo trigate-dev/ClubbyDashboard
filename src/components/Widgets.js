@@ -32,12 +32,13 @@ import {
   SalesValueChart,
   SalesValueChartphone,
 } from "./Charts";
+import { connect } from "react-redux";
 
 import Profile3 from "../assets/img/team/profile-picture-3.jpg";
 import ProfileCover from "../assets/img/profile-cover.jpg";
 import { createNewUserAPI } from "../services/user/actions";
 import teamMembers from "../data/teamMembers";
-import { changeLocationCapacityAPI } from "../services/location/actions";
+import { changeLocationInformationAPI } from "../services/location/actions";
 import axios from "axios";
 
 export const UserInformation = () => {
@@ -217,8 +218,8 @@ export function LocationInformation(props) {
       .get("/locationInfo")
       .then((response) => {
         setCapacity(response.data.capacity);
-        setOpeningTime(response.data.openingTime);
-        setClosingTime(response.data.closingTime);
+        setOpeningTime(response.data.opening_time);
+        setClosingTime(response.data.closing_time);
       })
       .catch((err) => {
         console.log(
@@ -233,7 +234,7 @@ export function LocationInformation(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    changeLocationCapacityAPI(capacity);
+    changeLocationInformationAPI(capacity, openingTime, closingTime);
     window.location.reload();
   };
 
@@ -249,7 +250,7 @@ export function LocationInformation(props) {
                 <Form.Label>Opening time</Form.Label>
                 <Form.Control
                   type="time"
-                  // can we add a placeholder ?
+                  defaultValue={openingTime}
                   onChange={(e) => setOpeningTime(e.target.value)}
                 />
               </Form.Group>
@@ -259,7 +260,7 @@ export function LocationInformation(props) {
                 <Form.Label>Closing time</Form.Label>
                 <Form.Control
                   type="time"
-                  // can we add a placeholder ?
+                  defaultValue={closingTime}
                   onChange={(e) => setClosingTime(e.target.value)}
                 />
               </Form.Group>

@@ -1,9 +1,11 @@
 import { SET_LOCATION_INFO} from './actionTypes';
 import axios from "axios";
 
-export const changeLocationCapacityAPI = (capacity) => {
+export const changeLocationInformationAPI = (capacity, opening_time, closing_time) => {
   const requestBody = {
     capacity: capacity,
+    opening_time,
+    closing_time
   };
 
   axios.post("/locationInfo", requestBody).catch((err) => {

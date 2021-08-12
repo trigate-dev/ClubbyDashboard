@@ -94,7 +94,7 @@ const TodayComponent = (props) => {
     if(props.openingTime && props.closingTime){
       var open = format(new Date(), "Y-MM-dd") + " " + props.openingTime 
       var close = new Date()
-      var close = format(close.setDate(close.getDate()+1), "Y-MM-dd") + " " + props.closingTime // TODO: add logic when club closes before midnight
+      close = format(close.setDate(close.getDate()+1), "Y-MM-dd") + " " + props.closingTime // TODO: add logic when club closes before midnight
       
       fetchChartData(open, close).then(
         (data) => {
