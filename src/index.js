@@ -25,18 +25,21 @@ import "@fortawesome/fontawesome-free/css/all.css";
 import "react-datetime/css/react-datetime.css";
 
 import HomePage from "./pages/HomePage";
-import ScrollToTop from "./components/ScrollToTop";
-
 import Root from "./root";
 
+try {
 ReactDOM.render(
   <React.StrictMode>
     <Root>
       <HashRouter>
-        <ScrollToTop />
         <HomePage />
       </HashRouter>
     </Root>
   </React.StrictMode>,
   document.getElementById("root")
 );
+} catch (error) {
+  alert("An error has occurred, you have been logged out.");
+  window.localStorage.clear(); //clear any saved state
+  window.location.reload(); // reload page
+}

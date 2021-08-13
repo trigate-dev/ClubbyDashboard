@@ -19,6 +19,7 @@ import requireAuth from "../utils/requireAuth";
 import axios from "axios";
 
 axios.defaults.baseURL = "https://clubbybackend.herokuapp.com";
+axios.defaults.headers.common["Content-Type"] = "application/json";
 
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false);
