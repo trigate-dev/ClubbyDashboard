@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/clubbydashboard.vercel.app/static/css/main.513b1f2f.chunk.css",
+    "main.js": "/clubbydashboard.vercel.app/static/js/main.1b000b96.chunk.js",
+    "main.js.map": "/clubbydashboard.vercel.app/static/js/main.1b000b96.chunk.js.map",
+    "runtime-main.js": "/clubbydashboard.vercel.app/static/js/runtime-main.f516d040.js",
+    "runtime-main.js.map": "/clubbydashboard.vercel.app/static/js/runtime-main.f516d040.js.map",
+    "static/css/2.32ba4d72.chunk.css": "/clubbydashboard.vercel.app/static/css/2.32ba4d72.chunk.css",
+    "static/js/2.3e8148c9.chunk.js": "/clubbydashboard.vercel.app/static/js/2.3e8148c9.chunk.js",
+    "static/js/2.3e8148c9.chunk.js.map": "/clubbydashboard.vercel.app/static/js/2.3e8148c9.chunk.js.map",
+    "index.html": "/clubbydashboard.vercel.app/index.html",
+    "precache-manifest.9915090846ecc6f2d3bbfde94d6d45e5.js": "/clubbydashboard.vercel.app/precache-manifest.9915090846ecc6f2d3bbfde94d6d45e5.js",
+    "service-worker.js": "/clubbydashboard.vercel.app/service-worker.js",
+    "static/css/2.32ba4d72.chunk.css.map": "/clubbydashboard.vercel.app/static/css/2.32ba4d72.chunk.css.map",
+    "static/css/main.513b1f2f.chunk.css.map": "/clubbydashboard.vercel.app/static/css/main.513b1f2f.chunk.css.map",
+    "static/js/2.3e8148c9.chunk.js.LICENSE.txt": "/clubbydashboard.vercel.app/static/js/2.3e8148c9.chunk.js.LICENSE.txt",
+    "static/media/all.css": "/clubbydashboard.vercel.app/static/media/fa-solid-900.9ae050d1.woff2",
+    "static/media/profile-cover.jpg": "/clubbydashboard.vercel.app/static/media/profile-cover.9992e0ee.jpg",
+    "static/media/profile-picture-1.jpg": "/clubbydashboard.vercel.app/static/media/profile-picture-1.4d26e151.jpg",
+    "static/media/profile-picture-2.jpg": "/clubbydashboard.vercel.app/static/media/profile-picture-2.487133c5.jpg",
+    "static/media/profile-picture-3.jpg": "/clubbydashboard.vercel.app/static/media/profile-picture-3.9a250e5c.jpg",
+    "static/media/profile-picture-4.jpg": "/clubbydashboard.vercel.app/static/media/profile-picture-4.ccd796b3.jpg",
+    "static/media/react-hero-logo.svg": "/clubbydashboard.vercel.app/static/media/react-hero-logo.2398310c.svg",
+    "static/media/signin.svg": "/clubbydashboard.vercel.app/static/media/signin.58ee1d5a.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f516d040.js",
+    "static/css/2.32ba4d72.chunk.css",
+    "static/js/2.3e8148c9.chunk.js",
+    "static/css/main.513b1f2f.chunk.css",
+    "static/js/main.1b000b96.chunk.js"
+  ]
+}
