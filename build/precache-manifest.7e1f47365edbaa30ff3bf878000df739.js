@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "609c46dbd2b5fbe1153744613de884be",
+    "revision": "494c2b4ade378710f2126451099ccbfe",
     "url": "/clubbydashboard.vercel.app/index.html"
   },
   {
-    "revision": "5d08b3cd6b5dcfd8030c",
+    "revision": "41cc98a53fba4b4e14c9",
     "url": "/clubbydashboard.vercel.app/static/css/2.32ba4d72.chunk.css"
   },
   {
-    "revision": "2e536953f11592ce89c9",
+    "revision": "e6711a016fb1aa6d95d8",
     "url": "/clubbydashboard.vercel.app/static/css/main.513b1f2f.chunk.css"
   },
   {
-    "revision": "5d08b3cd6b5dcfd8030c",
-    "url": "/clubbydashboard.vercel.app/static/js/2.3e8148c9.chunk.js"
+    "revision": "41cc98a53fba4b4e14c9",
+    "url": "/clubbydashboard.vercel.app/static/js/2.7236bdfb.chunk.js"
   },
   {
     "revision": "9f36583424cf900ca3e6c23446e83813",
-    "url": "/clubbydashboard.vercel.app/static/js/2.3e8148c9.chunk.js.LICENSE.txt"
+    "url": "/clubbydashboard.vercel.app/static/js/2.7236bdfb.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "2e536953f11592ce89c9",
-    "url": "/clubbydashboard.vercel.app/static/js/main.1b000b96.chunk.js"
+    "revision": "e6711a016fb1aa6d95d8",
+    "url": "/clubbydashboard.vercel.app/static/js/main.8e9c650f.chunk.js"
   },
   {
     "revision": "9a6ba7dcb9b519566d49",

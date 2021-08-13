@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/clubbydashboard.vercel.app/precache-manifest.9915090846ecc6f2d3bbfde94d6d45e5.js"
+  "/clubbydashboard.vercel.app/precache-manifest.7e1f47365edbaa30ff3bf878000df739.js"
 );
 
 self.addEventListener('message', (event) => {
