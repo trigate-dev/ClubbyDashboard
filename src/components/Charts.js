@@ -18,16 +18,24 @@ export const SalesValueChart = ({ data }) => {
       labelInterpolationFnc: (value) => `$${value / 1}k`,
     },
   };
-
-  const plugins = [ChartistTooltip()];
-
-  return (
-    <Chartist
+  const checkForData = () => {
+    if(data){
+      if(data.series[0].length != 1){ // this because Backend is initialized with a 0 at the start of the day for the call AtPresentVisitorsChange
+        return (<Chartist
       data={data}
       options={{ ...options, plugins }}
       type="Line"
       className="ct-series-g ct-double-octave"
-    />
+    />)
+      } else return <h5 style={{textAlign:'center', marginTop: 30, marginBottom: 30}}>Sorry, there is no data for this day...</h5>
+    } else
+    return <h5 style={{textAlign:'center', marginTop: 30, marginBottom: 30}}>Sorry, there is no data for this day...</h5>
+  }
+  const plugins = [ChartistTooltip()];
+  // data ? console.log(): console.log('data.series')
+  return (
+    checkForData()
+    
   );
 };
 

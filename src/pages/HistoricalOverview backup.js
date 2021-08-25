@@ -12,9 +12,9 @@ import { trafficShares } from "../data/charts";
 import {
   CounterWidget,
   CircleChartWidget,
+  SalesValueWidget,
   SalesValueWidgetPhone,
 } from "../components/Widgets";
-import VisitorsPerDay from "../components/VisitorsPerDay";
 
 const HistoryComponent = (props) => {
   const graphData = {
@@ -43,30 +43,9 @@ const HistoryComponent = (props) => {
       </div>
 
       <Row>
-        <Col xs={12} className="mb-4 d-none d-sm-block">
-          <VisitorsPerDay
-            title="Visitors over time"
-
-            datePicker={true}
-          />
-        </Col>
-        <Col xs={12} className="mb-4 d-sm-none">
-          <SalesValueWidgetPhone
-            title="Visitors over time"
-            value="10,567"
-            percentage={10.57}
-            data={graphData} // TODO
-          />
-        </Col>
-      </Row>
-
-      <Dropdown.Divider className="my-3 border-indigo" />
-
-      <Row>
-
         <Col xs={12} sm={6} xl={4} className="mb-4">
           <CounterWidget
-            category="Best Day"
+            category="Customers"
             title="345k"
             period="Feb 1 - Apr 1"
             percentage={18.2}
@@ -89,11 +68,10 @@ const HistoryComponent = (props) => {
         <Col xs={12} sm={6} xl={4} className="mb-4">
           <CircleChartWidget title="Traffic Share" data={trafficShares} />
         </Col>
-      </Row>
-      <Row>
-      <Col xs={12} className="mb-4 d-none d-sm-block">
-          <VisitorsPerDay
-            title="Average number of visitors per day of the week"
+
+        <Col xs={12} className="mb-4 d-none d-sm-block">
+          <SalesValueWidget
+            title="Sales Value"
             value="10,567"
             percentage={10.57}
             data={graphData}
@@ -101,13 +79,42 @@ const HistoryComponent = (props) => {
         </Col>
         <Col xs={12} className="mb-4 d-sm-none">
           <SalesValueWidgetPhone
-            title="Average number of visitors per day of the week"
+            title="Sales Value"
             value="10,567"
             percentage={10.57}
             data={graphData}
           />
         </Col>
+      </Row>
 
+      <Dropdown.Divider className="my-3 border-indigo" />
+
+      <Row>
+        <Col xs={12} sm={6} xl={4} className="mb-4">
+          <CounterWidget
+            category="Customers"
+            title="345k"
+            period="Feb 1 - Apr 1"
+            percentage={18.2}
+            icon={faChartLine}
+            iconColor="shape-secondary"
+          />
+        </Col>
+
+        <Col xs={12} sm={6} xl={4} className="mb-4">
+          <CounterWidget
+            category="Revenue"
+            title="$43,594"
+            period="Feb 1 - Apr 1"
+            percentage={28.4}
+            icon={faCashRegister}
+            iconColor="shape-tertiary"
+          />
+        </Col>
+
+        <Col xs={12} sm={6} xl={4} className="mb-4">
+          <CircleChartWidget title="Traffic Share" data={trafficShares} />
+        </Col>
       </Row>
     </>
   );

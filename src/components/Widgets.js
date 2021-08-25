@@ -39,6 +39,9 @@ import { createNewUserAPI } from "../services/user/actions";
 import teamMembers from "../data/teamMembers";
 import { changeLocationInformationAPI } from "../services/location/actions";
 import axios from "axios";
+import DatePicker from "./DatePicker";
+import { format } from "date-fns";
+
 
 export const UserInformation = () => {
   const handleSubmit = (event) => {
@@ -605,11 +608,34 @@ export const RankingWidget = () => {
   );
 };
 
-export const SalesValueWidget = (props) => {
-  const { title, percentage } = props;
+const SalesValueWidget = (props) => {
+  const { title, percentage, datePicker } = props;
   const percentageIcon = percentage < 0 ? faAngleDown : faAngleUp;
   const percentageColor = percentage < 0 ? "text-danger" : "text-success";
+  const [startDate, setStartDate] = useState(props.startDate)
+  
+  function handleStartDateChange(event) {
+    var formattedDate = format(event, "Y-MM-dd");
+    
+    var open = formattedDate + " " + props.openingTime 
+    // var close = formattedDate
+    // close = format(close.setDate(close.getDate()+1), "Y-MM-dd") + " " + props.closingTime // TODO: add logic when club closes before midnight
+    
+    console.log(open)
 
+    setStartDate(event)
+    
+      }
+    
+      useEffect(() => {
+        console.log('in use effect')
+        if(props.openingTime && props.closingTime){
+          
+          
+        }
+      }, []); // added these two props due to dependency wanring
+    
+    
   return (
     <Card className="bg-secondary-alt shadow-sm">
       <Card.Header className="d-flex flex-row align-items-center flex-0">
@@ -624,16 +650,13 @@ export const SalesValueWidget = (props) => {
             <span className={percentageColor}>{percentage}%</span>
           </small>
         </div>
-        <div className="d-flex ms-auto">
-          <Button variant="secondary" size="sm" className="me-2">
-            Month
-          </Button>
-          <Button variant="primary" size="sm" className="me-3">
-            Week
-          </Button>
-        </div>
+        {datePicker ? (<div className="d-flex ms-auto">
+        <DatePicker onStartDateChange={handleStartDateChange} startDate={startDate}/>
+        </div> ): null}  
+
       </Card.Header>
       <Card.Body className="p-2">
+
         <SalesValueChart data={props.data} />
       </Card.Body>
     </Card>
@@ -709,3 +732,4 @@ export const AcquisitionWidget = () => {
     </Card>
   );
 };
+

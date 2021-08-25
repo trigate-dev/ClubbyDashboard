@@ -1,66 +1,30 @@
 import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import { connect } from "react-redux";
-import { updateDateRange } from "../services/general/actions";
+
 import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale } from "react-datepicker";
 import nl from "date-fns/locale/nl";
+import { format } from "date-fns";
+
 // zie https://github.com/Hacker0x01/react-datepicker/blob/master/docs/datepicker.md
 
-function DatePickerComponent(props) {
-  const [startDate, setStartDate] = useState(new Date());
+/* As the selection of the date is in current local time (I'm in CET time), and the storage is in UTC, local time gets shifted by one hour backward when stored.
+https://github.com/Hacker0x01/react-datepicker/issues/1018
+Solution: use moments */
 
-  //const [endDate, setEndDate] = useState(null);
-  const [endDate, setEndDate] = useState(new Date(Date.now() + 6.048e8));
-
-  const onChangeStart = (date) => {
-    setStartDate(date);
-  };
-  const onChangeEnd = (date) => {
-    setEndDate(date);
-  };
-
-  registerLocale("nl", nl);
-
-  useEffect(() => {
-    props.updateDateRange([startDate, endDate]);
-    // console.log([startDate, endDate]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [startDate, endDate]);
-
+export default function DatePickerComponent(props) {
+  registerLocale('nl', nl)
   return (
-    <div>
-      <DatePicker
-        selected={startDate}
-        onChange={onChangeStart}
-        startDate={startDate}
+      <DatePicker 
+        selected={props.startDate}
+        onChange={props.onStartDateChange}
+        value={props.startDate}
         dateFormat="dd.MM.yyyy"
         showWeekNumbers
         locale="nl"
+        maxDate={Date.now()}
       />
-      <br />
-      <>{"   -   "}</>
-      <br />
-
-      <DatePicker
-        selected={endDate}
-        onChange={onChangeEnd}
-        endDate={endDate}
-        minDate={startDate}
-        dateFormat="dd.MM.yyyy"
-        showWeekNumbers
-        locale="nl"
-      />
-    </div>
   );
 }
 
-function mapStateToProps(state) {
-  return {
-    chosenDateRange: state.general.currentDateRange,
-  };
-}
-
-export default connect(mapStateToProps, {
-  updateDateRange,
-})(DatePickerComponent);
