@@ -35,31 +35,43 @@ import { setLocationInfoInStoreAPI } from "../services/location/actions"
 import DatePicker from "./DatePicker";
 import { format } from "date-fns";
 import { fetchChartData } from "../data/charts";
+import cloneDeep from 'lodash/cloneDeep';
 
 const VisitorsPerDay = (props) => {
   const { title, datePicker } = props;
   const [graphData, setGraphData] = useState(null)
-  const [startDate, setStartDate] = useState(new Date())
+  const [startDate, setStartDate] = useState(new Date()) //todo
 
   function handleStartDateChange(event) {
-    console.log('in visitors earleir', event)
     setStartDate(event)
     
-    var open = event
-    open = format(open, "Y-MM-dd") + " " + props.openingTime 
-    var close = event
-    close = format(close.setDate(close.getDate()+1), "Y-MM-dd") + " " + props.closingTime // TODO: add logic when club closes before midnight
-    console.log('in visitors', event)
-    
+  }
+
+  useEffect(() => {
+    // var open = startDate
+    // open = format(open, "Y-MM-dd") + " " + props.openingTime 
+    // var close = startDate
+    // close = format(close.setDate(close.getDate()+1), "Y-MM-dd") + " " + props.closingTime // TODO: add logic when club closes before midnight
+    // console.log('in in useEffect', startDate)
+    // fetchChartData(open, close).then(
+    //   (data) => {
+    //     setGraphData(data);
+    //   }
+    // );
+    var tmp_start_date = cloneDeep(startDate);
+    // var tmp_start_date = startDate.copy()
+    var open = format(tmp_start_date, "Y-MM-dd") + " " + props.openingTime 
+    var close = format(tmp_start_date.setDate(tmp_start_date.getDate()+1), "Y-MM-dd") + " " + props.closingTime // TODO: add logic when club closes before midnight
+
+    // open = format(open, "YYYY-MM-dd")
+        console.log(open, close)
+
     fetchChartData(open, close).then(
       (data) => {
         setGraphData(data);
       }
-    ); 
-    
-  }
-    
-  console.log('start',startDate)
+    );
+  }, [startDate]);
     
   return (
     <Card className="bg-secondary-alt shadow-sm">
@@ -69,6 +81,7 @@ const VisitorsPerDay = (props) => {
         </div>
         {datePicker ? (<div className="d-flex ms-auto">
         <DatePicker onStartDateChange={handleStartDateChange} startDate={startDate}/>
+        {console.log('DatePicker krijgt mee',startDate)}
         </div> ): null}  
 
       </Card.Header>

@@ -15,12 +15,14 @@ Solution: use moments */
 
 export default function DatePickerComponent(props) {
   registerLocale('nl', nl)
+  console.log('Datepicker ontvangt',props.startDate)
   return (
+    
       <DatePicker 
         selected={props.startDate}
         onChange={props.onStartDateChange}
         value={props.startDate}
-        dateFormat="dd.MM.yyyy"
+        dateFormat="yyyy-MM-dd"
         showWeekNumbers
         locale="nl"
         maxDate={Date.now()}
