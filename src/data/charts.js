@@ -58,3 +58,29 @@ export function fetchChartData(opening_datetime, closing_datetime) {
       );
     });
 }
+
+export function fetchBarChartData() {
+  return axios
+    .get("/getAverageVisitorsWeekdays")
+    .then((response) => {
+
+        console.dir(response)
+    })
+    //   var labels = response.data.map((x) =>
+    //     new Date(x.timestamp).toLocaleTimeString()
+    //   );
+    //   var series = response.data.map((x) => x.visitors_present);
+    //   const data = {
+    //     labels: labels,
+    //     series: [series],
+
+    //     // series: [{ meta: "labels", value: series }], // add meta data to present in the tooltip: find a way how to map over the values and pr
+    //   };
+    //   return data;
+    // })
+    .catch((err) => {
+      console.log(
+        "[statistics.actions.js] getAverageVisitorsWeekdaysAPI || Could not fetch the data. Try again later."
+      );
+    });
+}

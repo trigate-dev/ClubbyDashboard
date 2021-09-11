@@ -15,7 +15,7 @@ Solution: use moments */
 
 export default function DatePickerComponent(props) {
   registerLocale('nl', nl)
-  console.log('Datepicker ontvangt',props.startDate)
+
   return (
     
       <DatePicker 

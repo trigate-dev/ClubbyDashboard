@@ -15,6 +15,7 @@ import {
   SalesValueWidgetPhone,
 } from "../components/Widgets";
 import VisitorsPerDay from "../components/VisitorsPerDay";
+import AverageVisitorsPerDay from "../components/AverageVisitorsPerDay";
 
 const HistoryComponent = (props) => {
   const graphData = {
@@ -46,7 +47,6 @@ const HistoryComponent = (props) => {
         <Col xs={12} className="mb-4 d-none d-sm-block">
           <VisitorsPerDay
             title="Visitors over time"
-
             datePicker={true}
           />
         </Col>
@@ -91,24 +91,14 @@ const HistoryComponent = (props) => {
         </Col>
       </Row>
       <Row>
-      <Col xs={12} className="mb-4 d-none d-sm-block">
-          <VisitorsPerDay
+      <Col xs={12} className="mb-4 d-none d-sm-block" >
+          <AverageVisitorsPerDay
             title="Average number of visitors per day of the week"
-            value="10,567"
-            percentage={10.57}
-            data={graphData}
+            // data={graphData}
           />
-        </Col>
-        <Col xs={12} className="mb-4 d-sm-none">
-          <SalesValueWidgetPhone
-            title="Average number of visitors per day of the week"
-            value="10,567"
-            percentage={10.57}
-            data={graphData}
-          />
-        </Col>
-
+      </Col>
       </Row>
+      
     </>
   );
 };

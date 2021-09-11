@@ -96,30 +96,34 @@ export const CircleChart = (props) => {
   );
 };
 
-export const BarChart = (props) => {
-  const {
-    labels = [],
-    series = [],
-    chartClassName = "ct-golden-section",
-  } = props;
-  const data = { labels, series };
+export const BarChart = ({ data }) => {
+  const chartClassName = "ct-golden-section"
 
   const options = {
-    low: 0,
-    showArea: true,
+    height:300, // fix card height
+    low: data.series.map(function(row){ return Math.min(...row)}) - data.series.map(function(row){ return Math.min(...row)})/2,
+    high: data.series.map(function(row){ return Math.max(...row)}),
+    showArea: false,
+    
     axisX: {
-      position: "end",
+      labelOffset: {
+        x: 100,
+        y: 0
+      },
+
+      position: "end", //to middle and not twisted
     },
     axisY: {
       showGrid: false,
-      showLabel: false,
-      offset: 0,
+      onlyInteger:true,
     },
   };
+  
 
   const plugins = [ChartistTooltip()];
 
   return (
+
     <Chartist
       data={data}
       options={{ ...options, plugins }}
