@@ -13,6 +13,7 @@ import { setLocationInfoInStoreAPI } from "../services/location/actions"
 import axios from "axios";
 import { format } from "date-fns";
 import { fetchChartData } from "../data/charts";
+import VisitorsPerDay from "../components/VisitorsPerDay";
 
 const TodayComponent = (props) => {
   const [presentCount, setPresentCount] = useState(0);
@@ -137,7 +138,7 @@ const TodayComponent = (props) => {
       </div>
       <Row className="justify-content-md-center">
         <Col xs={12} className="mb-4 d-none d-sm-block">
-          <SalesValueWidget
+          <VisitorsPerDay
             title="Visitors over time"
             data={graphData}
             percentage={10.57}
