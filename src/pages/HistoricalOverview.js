@@ -62,7 +62,7 @@ const HistoryComponent = (props) => {
 
       <Dropdown.Divider className="my-3 border-indigo" />
 
-      <Row>
+      {/* <Row>
 
         <Col xs={12} sm={6} xl={4} className="mb-4">
           <CounterWidget
@@ -89,7 +89,7 @@ const HistoryComponent = (props) => {
         <Col xs={12} sm={6} xl={4} className="mb-4">
           <CircleChartWidget title="Traffic Share" data={trafficShares} />
         </Col>
-      </Row>
+      </Row> */}
       <Row>
       <Col xs={12} className="mb-4 d-none d-sm-block" >
           <AverageVisitorsPerDay
