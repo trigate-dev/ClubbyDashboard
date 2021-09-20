@@ -106,10 +106,11 @@ export const ProfileCardWidget = () => {
           alt="Neil Portrait"
           className="user-avatar large-avatar rounded-circle mx-auto mt-n7 mb-4"
         />
-        <Card.Title>{"<user name>"}</Card.Title>
-
-        <Card.Subtitle className="fw-normal">{"<club name>"} </Card.Subtitle>
-        <Card.Text className="text-gray mb-4">{"<club location>"}</Card.Text>
+        <Card.Title>{"Thomas Wierda"}</Card.Title>
+        <Card.Subtitle className="fw-normal">{"Admin"} </Card.Subtitle>
+        <br/>
+        <Card.Subtitle className="fw-normal">{"Het Feest van Ome Jan!"} </Card.Subtitle>
+        <Card.Text className="text-gray mb-4">{"Zieseniskade 25, 1071 RT Amsterdam"}</Card.Text>
       </Card.Body>
     </Card>
   );
