@@ -29,18 +29,18 @@ import {
 import {
   CircleChart,
   BarChart,
-  SalesValueChart,
+  // SalesValueChart,
   SalesValueChartphone,
 } from "./Charts";
 
-import Profile3 from "../assets/img/team/profile-picture-3.jpg";
+import Profile3 from "../assets/img/team/OmeJan.jpg";
 import ProfileCover from "../assets/img/profile-cover.jpg";
 import { createNewUserAPI } from "../services/user/actions";
 import teamMembers from "../data/teamMembers";
 import { changeLocationInformationAPI } from "../services/location/actions";
 import axios from "axios";
-import DatePicker from "./DatePicker";
-import { format } from "date-fns";
+// import DatePicker from "./DatePicker";
+// import { format } from "date-fns";
 
 
 export const UserInformation = () => {
@@ -106,7 +106,7 @@ export const ProfileCardWidget = () => {
           alt="Neil Portrait"
           className="user-avatar large-avatar rounded-circle mx-auto mt-n7 mb-4"
         />
-        <Card.Title>{"Thomas Wierda"}</Card.Title>
+        <Card.Title>{"Ome Jan"}</Card.Title>
         <Card.Subtitle className="fw-normal">{"Admin"} </Card.Subtitle>
         <br/>
         <Card.Subtitle className="fw-normal">{"Het Feest van Ome Jan!"} </Card.Subtitle>
@@ -609,60 +609,60 @@ export const RankingWidget = () => {
   );
 };
 
-const SalesValueWidget = (props) => {
-  const { title, percentage, datePicker } = props;
-  const percentageIcon = percentage < 0 ? faAngleDown : faAngleUp;
-  const percentageColor = percentage < 0 ? "text-danger" : "text-success";
-  const [startDate, setStartDate] = useState(props.startDate)
+// const SalesValueWidget = (props) => {
+//   const { title, percentage, datePicker } = props;
+//   const percentageIcon = percentage < 0 ? faAngleDown : faAngleUp;
+//   const percentageColor = percentage < 0 ? "text-danger" : "text-success";
+//   const [startDate, setStartDate] = useState(props.startDate)
   
-  function handleStartDateChange(event) {
-    var formattedDate = format(event, "Y-MM-dd");
+//   function handleStartDateChange(event) {
+//     var formattedDate = format(event, "Y-MM-dd");
     
-    var open = formattedDate + " " + props.openingTime 
-    // var close = formattedDate
-    // close = format(close.setDate(close.getDate()+1), "Y-MM-dd") + " " + props.closingTime // TODO: add logic when club closes before midnight
+//     var open = formattedDate + " " + props.openingTime 
+//     // var close = formattedDate
+//     // close = format(close.setDate(close.getDate()+1), "Y-MM-dd") + " " + props.closingTime // TODO: add logic when club closes before midnight
     
-    console.log(open)
+//     console.log(open)
 
-    setStartDate(event)
+//     setStartDate(event)
     
-      }
+//       }
     
-      useEffect(() => {
-        console.log('in use effect')
-        if(props.openingTime && props.closingTime){
+//       useEffect(() => {
+//         console.log('in use effect')
+//         if(props.openingTime && props.closingTime){
           
           
-        }
-      }, []); // added these two props due to dependency wanring
+//         }
+//       }, []); // added these two props due to dependency wanring
     
     
-  return (
-    <Card className="bg-secondary-alt shadow-sm">
-      <Card.Header className="d-flex flex-row align-items-center flex-0">
-        <div className="d-block">
-          <h5 className="fw-normal mb-2">{title}</h5>
-          <small className="fw-bold mt-2">
-            <span className="me-2">Yesterday</span>
-            <FontAwesomeIcon
-              icon={percentageIcon}
-              className={`${percentageColor} me-1`}
-            />
-            <span className={percentageColor}>{percentage}%</span>
-          </small>
-        </div>
-        {datePicker ? (<div className="d-flex ms-auto">
-        <DatePicker onStartDateChange={handleStartDateChange} startDate={startDate}/>
-        </div> ): null}  
+//   return (
+//     <Card className="bg-secondary-alt shadow-sm">
+//       <Card.Header className="d-flex flex-row align-items-center flex-0">
+//         <div className="d-block">
+//           <h5 className="fw-normal mb-2">{title}</h5>
+//           <small className="fw-bold mt-2">
+//             <span className="me-2">Yesterday</span>
+//             <FontAwesomeIcon
+//               icon={percentageIcon}
+//               className={`${percentageColor} me-1`}
+//             />
+//             <span className={percentageColor}>{percentage}%</span>
+//           </small>
+//         </div>
+//         {datePicker ? (<div className="d-flex ms-auto">
+//         <DatePicker onStartDateChange={handleStartDateChange} startDate={startDate}/>
+//         </div> ): null}  
 
-      </Card.Header>
-      <Card.Body className="p-2">
+//       </Card.Header>
+//       <Card.Body className="p-2">
 
-        <SalesValueChart data={props.data} />
-      </Card.Body>
-    </Card>
-  );
-};
+//         <SalesValueChart data={props.data} />
+//       </Card.Body>
+//     </Card>
+//   );
+// };
 
 export const SalesValueWidgetPhone = (props) => {
   const { title, value, percentage } = props;
