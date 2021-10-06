@@ -1,30 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faAngleDown,
-  faAngleUp,
-  faChartArea,
-  faChartBar,
-  faChartLine,
-  faFlagUsa,
-  faFolderOpen,
-  faGlobeEurope,
-} from "@fortawesome/free-solid-svg-icons";
-import {
-  faAngular,
-  faBootstrap,
-  faReact,
-  faVuejs,
-} from "@fortawesome/free-brands-svg-icons";
-import {
-  Col,
-  Row,
   Card,
-  Image,
-  Form,
-  Button,
-  ListGroup,
-  ProgressBar,
 } from "@themesberg/react-bootstrap";
 import {
   SalesValueChart,
@@ -57,7 +33,7 @@ const VisitorsPerDay = (props) => {
         setGraphData(data);
       }
     );
-  }, [startDate]);
+  }, [startDate, props.openingTime, props.closingTime]);
     
   return (
     <Card className="bg-secondary-alt shadow-sm">

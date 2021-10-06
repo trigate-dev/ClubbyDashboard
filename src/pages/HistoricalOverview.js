@@ -7,11 +7,7 @@ import {
   ButtonGroup,
   Dropdown,
 } from "@themesberg/react-bootstrap";
-import { faCashRegister, faChartLine } from "@fortawesome/free-solid-svg-icons";
-import { trafficShares } from "../data/charts";
 import {
-  CounterWidget,
-  CircleChartWidget,
   SalesValueWidgetPhone,
 } from "../components/Widgets";
 import VisitorsPerDay from "../components/VisitorsPerDay";
