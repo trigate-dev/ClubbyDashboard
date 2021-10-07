@@ -41,7 +41,7 @@ export const RankChartWidget = (props) => {
         {graphData ? <Card.Body className="p-2" style={{height: 300}}> 
         {/* fix height */}
           {/* <BarChart data={graphData} /> */}
-          <ProgressTrackWidget title='ola' percentage={100}/>
+          <ProgressTrackWidget title='ola' percentage={100} data={graphData}/>
 
         </Card.Body> : null }
         
