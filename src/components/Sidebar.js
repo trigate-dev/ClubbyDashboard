@@ -22,7 +22,7 @@ import { Link } from "react-router-dom";
 
 import { Routes } from "../routes";
 import ReactHero from "../assets/img/technologies/react-hero-logo.svg";
-import ProfilePicture from "../assets/img/team/profile-picture-3.jpg";
+import ProfilePicture from "../assets/img/team/OmeJan.jpg";
 
 export default (props = {}) => {
   const location = useLocation();
@@ -165,8 +165,9 @@ export default (props = {}) => {
               </Nav.Link>
             </div>
             <Nav className="flex-column pt-3 pt-md-0">
-              <NavItem title="Clubby" image={ReactHero} />
-
+              <NavItem title="Clubby" image={ReactHero}
+                link={Routes.DashboardOverview.path}
+              />
               <NavItem
                 title="Today"
                 link={Routes.DashboardOverview.path}

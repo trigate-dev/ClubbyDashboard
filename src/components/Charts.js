@@ -20,7 +20,7 @@ export const SalesValueChart = ({ data }) => {
   };
   const checkForData = () => {
     if(data){
-      if(data.series[0].length != 1){ // this because Backend is initialized with a 0 at the start of the day for the call AtPresentVisitorsChange
+      if(data.series[0].length !== 1){ // this because Backend is initialized with a 0 at the start of the day for the call AtPresentVisitorsChange
         return (<Chartist
       data={data}
       options={{ ...options, plugins }}

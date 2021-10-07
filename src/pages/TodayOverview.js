@@ -4,7 +4,7 @@ import { faCashRegister, faChartLine } from "@fortawesome/free-solid-svg-icons";
 import { Col, Row, Button } from "@themesberg/react-bootstrap";
 import {
   CounterWidget,
-  SalesValueWidget,
+  // SalesValueWidget,
   SalesValueWidgetPhone,
 } from "../components/Widgets";
 

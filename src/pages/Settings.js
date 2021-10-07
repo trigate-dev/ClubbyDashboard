@@ -7,7 +7,7 @@ import {
   LocationInformation,
 } from "../components/Widgets";
 
-import Profile3 from "../assets/img/team/profile-picture-3.jpg";
+import Profile3 from "../assets/img/team/OmeJan.jpg";
 
 export default () => {
   return (

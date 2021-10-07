@@ -9,7 +9,7 @@ import {
   Container,
 } from "@themesberg/react-bootstrap";
 import { Routes } from "../routes";
-import Profile3 from "../assets/img/team/profile-picture-3.jpg";
+import Profile3 from "../assets/img/team/OmeJan.jpg";
 import { Link } from "react-router-dom";
 import { loginAPI } from "../services/login/actions";
 import { connect } from "react-redux";
