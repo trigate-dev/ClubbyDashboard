@@ -38,7 +38,7 @@ export const BarChartWidget = (props) => {
             ))}
           </div>
         </Card.Body>
-        {console.log('ola')}
+
         {graphData ? <Card.Body className="p-2" style={{height: 300}}> 
         {/* fix height */}
           <BarChart data={graphData} />

@@ -476,11 +476,14 @@ export const TeamMembersWidget = () => {
   );
 };
 
-export const ProgressTrackWidget = () => {
+export const ProgressTrackWidget = (props) => {
+  const {cardHeader, data} = props;
+  // console.dir(data)
+  const maxValue = data ? Math.max(...data.map(o=>o.visitors)) : 0
+  // console.dir(max)
   const Progress = (props) => {
-    const { title, percentage, icon, color, last = false } = props;
+    const { title, visitors, icon, color, last = false } = props;
     const extraClassName = last ? "" : "mb-2";
-
     return (
       <Row className={`align-items-center ${extraClassName}`}>
         <Col xs="auto">
@@ -493,10 +496,10 @@ export const ProgressTrackWidget = () => {
             <div className="progress-info">
               <h6 className="mb-0">{title}</h6>
               <small className="fw-bold text-dark">
-                <span>{percentage} %</span>
+                <span>{visitors}</span>
               </small>
             </div>
-            <ProgressBar variant={color} now={percentage} min={0} max={100} />
+            <ProgressBar variant={color} now={visitors} min={0} max={maxValue} />
           </div>
         </Col>
       </Row>
@@ -506,16 +509,18 @@ export const ProgressTrackWidget = () => {
   return (
     <Card border="light" className="shadow-sm">
       <Card.Header className="border-bottom border-light">
-        <h5 className="mb-0">Progress track</h5>
+        <h5 className="mb-0">{cardHeader}</h5>
       </Card.Header>
       <Card.Body>
-        <Progress
-          title="Rocket - SaaS Template"
+      {data ? data.map((row)=> <Progress
+          title={row.date}
           color="purple"
           icon={faBootstrap}
-          percentage={34}
-        />
-        <Progress
+          visitors={row.visitors}
+        />) : null}
+      
+        
+        {/* <Progress
           title="Pixel - Design System"
           color="danger"
           icon={faAngular}
@@ -539,7 +544,11 @@ export const ProgressTrackWidget = () => {
           color="purple"
           icon={faBootstrap}
           percentage={34}
-        />
+        /> */}
+          {data ? console.dir(data.map((row)=>row.visitors)): null}
+          {data ? console.dir(Math.max(...data.map(o=>o.visitors))): null}
+
+
       </Card.Body>
     </Card>
   );
