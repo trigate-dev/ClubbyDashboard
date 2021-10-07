@@ -4,8 +4,8 @@ import {
 } from "@themesberg/react-bootstrap";
 import {
     BarChart
-  } from "./Charts";
-import { fetchBarChartData } from "../services/data/actions";
+  } from "../Charts";
+import { fetchBarChartData } from "../../services/data/actions";
 
 
 export const BarChartWidget = (props) => {
