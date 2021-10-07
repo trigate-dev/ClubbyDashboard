@@ -8,10 +8,11 @@ import {
   Dropdown,
 } from "@themesberg/react-bootstrap";
 import {
-  SalesValueWidgetPhone,
+  SalesValueWidgetPhone,ProgressTrackWidget
 } from "../components/Widgets";
 import VisitorsPerDay from "../components/VisitorsPerDay";
-import AverageVisitorsPerDay from "../components/AverageVisitorsPerDay";
+import AverageVisitorsPerDay from "../components/charts/AverageVisitorsPerDay";
+import Top5BusiestDays from "../components/charts/Top5BusiestDays";
 
 const HistoryComponent = (props) => {
   const graphData = {
@@ -92,6 +93,9 @@ const HistoryComponent = (props) => {
             title="Average number of visitors per day of the week"
             // data={graphData}
           />
+      </Col>
+      <Col xs={12} className="mb-4 d-none d-sm-block" >
+      <Top5BusiestDays />
       </Col>
       </Row>
       
