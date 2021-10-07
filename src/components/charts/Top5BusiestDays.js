@@ -21,9 +21,9 @@ export const RankChartWidget = (props) => {
       }, []);
     return (
       <Card border="light" className="shadow-sm" >
-        <Card.Body className="d-flex flex-row align-items-center flex-0 border-bottom">
+        {/* <Card.Body className="d-flex flex-row align-items-center flex-0 border-bottom">
           <div className="d-block">
-            <h5 className="fw-normal mb-2">{title}</h5>
+            <h5 className="fw-normal mb-2">{'ola'}</h5>
           </div>
           <div className="d-block ms-auto">
             {data.map((d) => (
@@ -36,14 +36,13 @@ export const RankChartWidget = (props) => {
               </div>
             ))}
           </div>
-        </Card.Body>
-        {console.log('ola')}
-        {graphData ? <Card.Body className="p-2" style={{height: 300}}> 
+        </Card.Body> */}
+        {/* {graphData ? <Card.Body className="p-2" style={{height: 300}}>  */}
         {/* fix height */}
           {/* <BarChart data={graphData} /> */}
-          <ProgressTrackWidget title='ola' percentage={100} data={graphData}/>
+          <ProgressTrackWidget cardHeader={'5 Busiest Days'} data={graphData}/>
 
-        </Card.Body> : null }
+        {/* </Card.Body> : null } */}
         
       </Card>
     );
