@@ -88,20 +88,19 @@ export function fetchTop5DaysChartData() {
   return axios
     .get("/getTop5BusyDays")
     .then((response) => {
-      console.dir(response)
-      // var labels = response.data.map((x) =>
-      //     x.weekday
-      // );
+      var labels = response.data.map((x) =>
+          x.weekday
+      );
+      console.dir(response.data)
 
-      // var series = response.data.map((x) => Number(x.avg.toFixed(0)));
+      var series = response.data.map((x) => Number(x.avg.toFixed(0)));
 
-      // const data = {
-      //   labels: labels,
-      //   series: [series],
-      //   // series: [{ meta: "labels", value: series }], // add meta data to present in the tooltip: find a way how to map over the values and pr
-      // };
-
-      // return data;
+      const data = {
+        labels: labels,
+        series: [series],
+        // series: [{ meta: "labels", value: series }], // add meta data to present in the tooltip: find a way how to map over the values and pr
+      };
+      return data;
     })
     .catch((err) => {
       console.log(

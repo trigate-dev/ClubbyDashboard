@@ -19,7 +19,6 @@ export const RankChartWidget = (props) => {
           }
         );
       }, []);
-  
     return (
       <Card border="light" className="shadow-sm" >
         <Card.Body className="d-flex flex-row align-items-center flex-0 border-bottom">
@@ -42,7 +41,7 @@ export const RankChartWidget = (props) => {
         {graphData ? <Card.Body className="p-2" style={{height: 300}}> 
         {/* fix height */}
           {/* <BarChart data={graphData} /> */}
-          <ProgressTrackWidget title='ola'/>
+          <ProgressTrackWidget title='ola' percentage={100}/>
 
         </Card.Body> : null }
         
