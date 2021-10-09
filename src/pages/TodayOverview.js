@@ -22,7 +22,6 @@ const TodayComponent = (props) => {
   const [graphData, setGraphData] = useState({});
   const [occupancy, setOccupancy] = useState(0);
   
-
   async function getPresentVisitorsAPI(opening_datetime, closing_datetime) {
     await axios
       .get("/getPresentVisitors", {
