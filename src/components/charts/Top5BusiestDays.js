@@ -20,29 +20,9 @@ export const RankChartWidget = (props) => {
         );
       }, []);
     return (
-      <Card border="light" className="shadow-sm" >
-        {/* <Card.Body className="d-flex flex-row align-items-center flex-0 border-bottom">
-          <div className="d-block">
-            <h5 className="fw-normal mb-2">{'ola'}</h5>
-          </div>
-          <div className="d-block ms-auto">
-            {data.map((d) => (
-              <div
-                key={`bar-element-${d.id}`}
-                className="d-flex align-items-center text-end mb-2"
-              >
-                <span className={`shape-xs rounded-circle bg-${d.color} me-2`} />
-                <small className="fw-normal">{d.label}</small>
-              </div>
-            ))}
-          </div>
-        </Card.Body> */}
-        {/* {graphData ? <Card.Body className="p-2" style={{height: 300}}>  */}
-        {/* fix height */}
-          {/* <BarChart data={graphData} /> */}
-          <ProgressTrackWidget cardHeader={'5 Busiest Days'} data={graphData}/>
-
-        {/* </Card.Body> : null } */}
+     <Card border="light" className="shadow-sm" >
+        
+          <ProgressTrackWidget cardHeader={'Top 5 Busiest Days'} subHeader={'jajaja'} data={graphData}/>
         
       </Card>
     );
