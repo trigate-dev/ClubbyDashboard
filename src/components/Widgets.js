@@ -477,10 +477,9 @@ export const TeamMembersWidget = () => {
 };
 
 export const ProgressTrackWidget = (props) => {
-  const {cardHeader, data} = props;
-  // console.dir(data)
+  const {cardHeader, subHeader, data} = props;
   const maxValue = data ? Math.max(...data.map(o=>o.visitors)) : 0
-  // console.dir(max)
+
   const Progress = (props) => {
     const { title, visitors, icon, color, last = false } = props;
     const extraClassName = last ? "" : "mb-2";
@@ -488,7 +487,7 @@ export const ProgressTrackWidget = (props) => {
       <Row className={`align-items-center ${extraClassName}`}>
         <Col xs="auto">
           <span className={`icon icon-md text-${color}`}>
-            <FontAwesomeIcon icon={icon} className="me-1" />
+            {icon}
           </span>
         </Col>
         <Col>
@@ -509,13 +508,14 @@ export const ProgressTrackWidget = (props) => {
   return (
     <Card border="light" className="shadow-sm">
       <Card.Header className="border-bottom border-light">
-        <h5 className="mb-0">{cardHeader}</h5>
+        <h5 className="fw-normal mb-2">{cardHeader}</h5>
+        <h6 className="fw-normal mb-2">{subHeader}</h6>
       </Card.Header>
       <Card.Body>
       {data ? data.map((row)=> <Progress
           title={row.date}
-          color="purple"
-          icon={faBootstrap}
+          color="gray"
+          icon={row.rank}
           visitors={row.visitors}
         />) : null}
       
@@ -545,11 +545,7 @@ export const ProgressTrackWidget = (props) => {
           icon={faBootstrap}
           percentage={34}
         /> */}
-          {data ? console.dir(data.map((row)=>row.visitors)): null}
-          {data ? console.dir(Math.max(...data.map(o=>o.visitors))): null}
-
-
-      </Card.Body>
+    </Card.Body>
     </Card>
   );
 };
